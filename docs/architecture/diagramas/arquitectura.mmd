@@ -1,0 +1,40 @@
+flowchart TB
+    CIU["Ciudadano (App Móvil / PWA Offline)"]
+    BRI["Brigadista"]
+    COO["Coordinador Defensa Civil"]
+
+    subgraph APP ["SismoReporta AQP - Monolito Modular (Un solo despliegue)"]
+        API["Capa de Presentación: API REST / GraphQL"]
+        
+        M1["Módulo Ingesta y Reportes"]
+        M2["Módulo GIS y Mapa de Daños"]
+        M3["Módulo Gestión de Brigadas"]
+        M4["Módulo Alertas y Notificaciones"]
+        
+        INF["Capa de Infraestructura / Repositorios"]
+    end
+
+    QUEUE[("Cola Redis / Celery")]
+    DB[("PostgreSQL + PostGIS")]
+    OBJ["Object Storage (S3/MinIO - Fotos)"]
+    SMS["Servicio SMS / WhatsApp API"]
+
+    CIU -->|1. Envia reporte / Sync| API
+    BRI & COO -->|2. Gestionan y visualizan| API
+
+    API --> M1 & M2 & M3 & M4
+    
+    M1 -->|Encola reporte| QUEUE
+    QUEUE -->|Procesa asincrónicamente| INF
+    M2 & M3 & M4 --> INF
+
+    INF --> DB
+    INF --> OBJ
+    INF --> SMS
+
+    classDef mod fill:#E8F5E9,stroke:#2E7D32,color:#000
+    classDef ext fill:#F2F2F2,stroke:#7F7F7F,color:#000,stroke-dasharray: 4 3
+    classDef usr fill:#FDEDEC,stroke:#C8310E,color:#000
+    class M1,M2,M3,M4 mod
+    class QUEUE,DB,OBJ,SMS ext
+    class CIU,BRI,COO usr
