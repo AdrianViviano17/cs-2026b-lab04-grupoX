@@ -1,0 +1,47 @@
+@startuml
+skinparam dpi 200
+skinparam componentStyle rectangle
+skinparam defaultFontName Arial
+skinparam backgroundColor white
+
+title Alternativa B (Descartada): SismoReporta AQP con Microservicios
+
+actor "Ciudadano / Brigadista" as U
+node "API Gateway / Nginx" as GW
+
+package "Microservicios Independientes" {
+    [Servicio Ingesta] as S1
+    [Servicio GIS & Mapas] as S2
+    [Servicio Brigadas] as S3
+    [Servicio Notificaciones] as S4
+}
+
+queue "Apache Kafka Broker" as KAFKA
+
+database "BD Ingesta" as DB1
+database "BD GIS (PostGIS)" as DB2
+database "BD Brigadas" as DB3
+
+cloud "Proveedor SMS / WhatsApp" as EXT
+
+U --> GW
+GW --> S1
+GW --> S2
+GW --> S3
+
+S1 --> DB1
+S2 --> DB2
+S3 --> DB3
+
+S1 ..> KAFKA : Evento: ReporteCreado
+KAFKA ..> S2
+KAFKA ..> S4
+S4 --> EXT
+
+note bottom of KAFKA
+  **Alternativa Descartada (Puntaje: 2.80 en Matriz)**
+  Razón: Alta complejidad de despliegue, monitoreo distribuido 
+  y costo elevado de infraestructura. Imposible de construir 
+  y operar con 3 desarrolladores en 1 mes.
+end note
+@enduml
