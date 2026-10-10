@@ -38,11 +38,11 @@ flowchart TB
 ## Diseño UML (Lab 05) - SismoReporta AQP
 
 ### 1. Diagrama de Clases (E1)
-![Diagrama de Clases](img/clases.png)
+![Diagrama de Clases](docs/Img/clases.png)
 * [Ver código fuente PlantUML](docs/design/clases.puml)
 
 ### 2. Diagrama de Secuencia - Sincronización Offline (E2)
-![Diagrama de Secuencia](img/secuencia-sincronizar-reporte.png)
+![Diagrama de Secuencia](docs/Img/secuencia-sincronizar-reporte.png)
 * [Ver código fuente PlantUML](docs/design/secuencia-sincronizar-reporte.puml)
 
 ### 3. Máquina de Estados - Entidad Reporte (E3)
@@ -58,10 +58,10 @@ stateDiagram-v2
 ```
 * [Ver código fuente Mermaid](docs/design/estados-reporte.mmd)
 ### 4. Diagrama de Actividades - Asignación de Brigadas (E4)
-![Diagrama de Actividades](img/actividades-asignacion-brigadas.png)
+![Diagrama de Actividades](docs/Img/actividades-asignacion-brigadas.png)
 * [Ver código fuente PlantUML](docs/design/actividades-asignacion-brigadas.puml)
 ### 5. Diagrama de Paquetes - Coherencia ADR-001 (E5)
-![Diagrama de Paquetes](img/paquetes.png)
+![Diagrama de Paquetes](docs/Img/paquetes.png)
 * [Ver código fuente PlantUML](docs/design/paquetes.puml)
 **## Documentación de Soporte y Consistencia (E6 - E7)**
 - **Historia de Usuario:** [HU-08 - Enviar y Sincronizar Reporte Offline](docs/design/historia.md)
