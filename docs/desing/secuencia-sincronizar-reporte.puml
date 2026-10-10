@@ -1,0 +1,34 @@
+@startuml secuencia-sincronizar-reporte
+autonumber
+actor Ciudadano
+participant "AppMobile" as UI
+participant "GestorReportes" as S
+participant "RepositorioReportes" as R
+participant "Reporte" as Rep
+participant "SyncHttpAdapter" as G
+participant "NotificadorBrigada" as N
+
+Ciudadano -> UI: Enviar reporte de emergencia
+UI -> S: procesarEnvioOffline(datos)
+S -> Rep: guardarLocalmente()
+S -> Rep: cambiarEstado(ENCOLADO)
+S -> R: guardarLocal(reporte)
+R --> UI: Confirmación (Guardado offline)
+
+loop evento al detectar red móvil activa
+    S -> R: obtenerEncolados()
+    R --> S: listaPendientes
+    loop por cada reporte encolado
+        S -> G: enviarReporte(reporte)
+        alt conexión exitosa (servidor responde OK)
+            G --> S: true
+            S -> Rep: cambiarEstado(RECIBIDO)
+            S -> R: guardarLocal(reporte)
+            S ->> N: notificarAlerta(reporte)
+        else sin red o servidor no disponible
+            G --> S: false
+            note right of S: Mantiene estado ENCOLADO para reintentar
+        end
+    end
+end
+@enduml
