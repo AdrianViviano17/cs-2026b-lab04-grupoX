@@ -1,0 +1,24 @@
+@startuml paquetes
+package "sismoreporta" {
+  package "reportes" as REP
+  package "sincronizacion" as SYNC
+  package "brigadas" as BRIG
+  package "notificaciones" as NOT
+  package "compartido" as COM
+
+  REP ..> SYNC : usa ServicioSincronizacion (puerto)
+  REP ..> NOT : usa NotificadorBrigada (puerto)
+  BRIG ..> REP : lee reportes verificados
+  
+  REP ..> COM
+  SYNC ..> COM
+  BRIG ..> COM
+  NOT ..> COM
+}
+
+note bottom of SYNC
+Regla (ADR-001): Desacoplamiento total.
+El módulo sincronización no conoce
+a las brigadas ni a las notificaciones.
+end note
+@enduml
