@@ -1,0 +1,28 @@
+@startuml actividades-asignacion-brigadas
+|Ciudadano / Sistema|
+start
+:Recibe reporte sincronizado;
+:Calcula nivel de prioridad del sismo;
+
+|Centro de Operaciones (COER)|
+:Evalúa magnitud y severidad;
+if (¿Prioridad Alta / Riesgo Vital?) then (sí)
+  fork
+    :Activa alerta roja en central;
+  fork again
+    :Notifica a la brigada médica de rescate;
+  end fork
+else (no)
+  :Clasifica para atención programada;
+  :Notifica a la brigada de evaluación técnica;
+endif
+
+|Brigada de Respuesta|
+:Recibe orden de desplazamiento;
+:Atiende emergencia en terreno;
+:Registra cierre de atención;
+
+|Centro de Operaciones (COER)|
+:Actualiza estado del reporte a ATENDIDO;
+stop
+@enduml
