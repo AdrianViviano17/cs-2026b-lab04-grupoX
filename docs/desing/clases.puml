@@ -1,0 +1,68 @@
+@startuml clases-sismoreporta
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class Ciudadano {
+  - id: UUID
+  - DNI: String
+  - celular: String
+  + registrarReporte()
+}
+
+class Reporte {
+  - id: UUID
+  - fechaHora: DateTime
+  - latitud: double
+  - longitud: double
+  - descripcion: String
+  - estado: EstadoReporte
+  + guardarLocalmente()
+  + sincronizar()
+  + cambiarEstado(nuevoEstado: EstadoReporte)
+}
+
+class DetalleDanio {
+  - tipoDanio: String
+  - severidad: int
+  + evaluarSeveridad()
+}
+
+enum EstadoReporte {
+  BORRADOR
+  ENCOLADO
+  RECIBIDO
+  VERIFICADO
+  ATENDIDO
+}
+
+interface ServicioSincronizacion <<puerto>> {
+  + enviarReporte(r: Reporte): boolean
+}
+
+class SyncHttpAdapter <<adaptador>> {
+  + enviarReporte(r: Reporte): boolean
+}
+
+class GestorReportes <<servicio>> {
+  + procesarEnvioOffline(r: Reporte)
+  + sincronizarPendientes()
+}
+
+interface RepositorioReportes <<puerto>> {
+  + guardarLocal(r: Reporte)
+  + obtenerEncolados(): List<Reporte>
+}
+
+interface NotificadorBrigada <<puerto>> {
+  + notificarAlerta(r: Reporte)
+}
+
+Ciudadano "1" -- "0..*" Reporte : crea >
+Reporte "1" *-- "1..*" DetalleDanio : contiene >
+Reporte --> EstadoReporte
+SyncHttpAdapter ..|> ServicioSincronizacion
+GestorReportes ..> Reporte
+GestorReportes ..> ServicioSincronizacion
+GestorReportes ..> RepositorioReportes
+GestorReportes ..> NotificadorBrigada
+@enduml
