@@ -39,11 +39,11 @@ flowchart TB
 
 ### 1. Diagrama de Clases (E1)
 ![Diagrama de Clases](docs/Img/clases.png)
-* [Ver código fuente PlantUML](docs/design/clases.puml)
+* [Ver código fuente PlantUML](docs/desing/clases.puml)
 
 ### 2. Diagrama de Secuencia - Sincronización Offline (E2)
 ![Diagrama de Secuencia](docs/Img/secuencia-sincronizar-reporte.png)
-* [Ver código fuente PlantUML](docs/design/secuencia-sincronizar-reporte.puml)
+* [Ver código fuente PlantUML](docs/desing/secuencia-sincronizar-reporte.puml)
 
 ### 3. Máquina de Estados - Entidad Reporte (E3)
 ```mermaid
@@ -56,16 +56,16 @@ stateDiagram-v2
     VERIFICADO --> ATENDIDO: asignarBrigada()
     ATENDIDO --> [*]
 ```
-* [Ver código fuente Mermaid](docs/design/estados-reporte.mmd)
+* [Ver código fuente Mermaid](docs/desing/estados-reporte.mmd)
 ### 4. Diagrama de Actividades - Asignación de Brigadas (E4)
 ![Diagrama de Actividades](docs/Img/actividades-asignacion-brigadas.png)
-* [Ver código fuente PlantUML](docs/design/actividades-asignacion-brigadas.puml)
+* [Ver código fuente PlantUML](docs/desing/actividades-asignacion-brigadas.puml)
 ### 5. Diagrama de Paquetes - Coherencia ADR-001 (E5)
 ![Diagrama de Paquetes](docs/Img/paquetes.png)
-* [Ver código fuente PlantUML](docs/design/paquetes.puml)
+* [Ver código fuente PlantUML](docs/desing/paquetes.puml)
 **## Documentación de Soporte y Consistencia (E6 - E7)**
-- **Historia de Usuario:** [HU-08 - Enviar y Sincronizar Reporte Offline](docs/design/historia.md)
-- **Análisis Round-Trip:** [Informe de Ingeniería Directa e Inversa](docs/design/round-trip.md)
-- **Reglas C1-C5:** [Auditoría de Consistencia de Diagramas](docs/design/consistencia.md)
+- **Historia de Usuario:** [HU-08 - Enviar y Sincronizar Reporte Offline](docs/desing/historia.md)
+- **Análisis Round-Trip:** [Informe de Ingeniería Directa e Inversa](docs/desing/round-trip.md)
+- **Reglas C1-C5:** [Auditoría de Consistencia de Diagramas](docs/desing/consistencia.md)
 - **Uso de IA:** [Bitácora de Interacciones y Prompts](docs/design/bitacora-ia.md)
 - **Código Fuente:** [Esqueleto de Dominio en Python](src/reportes/dominio.py)    
