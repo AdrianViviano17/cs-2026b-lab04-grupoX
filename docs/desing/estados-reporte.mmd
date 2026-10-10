@@ -1,0 +1,8 @@
+stateDiagram-v2
+    [*] --> BORRADOR: crearReporte()
+    BORRADOR --> ENCOLADO: guardarLocalmente() [sin conexion]
+    BORRADOR --> RECIBIDO: enviarReporte() [con conexion]
+    ENCOLADO --> RECIBIDO: sincronizar() [conexion reestablecida]
+    RECIBIDO --> VERIFICADO: verificarDanio()
+    VERIFICADO --> ATENDIDO: asignarBrigada()
+    ATENDIDO --> [*]
