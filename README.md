@@ -63,7 +63,7 @@ stateDiagram-v2
 ### 5. Diagrama de Paquetes - Coherencia ADR-001 (E5)
 ![Diagrama de Paquetes](docs/Img/paquetes.png)
 * [Ver código fuente PlantUML](docs/desing/paquetes.puml)
-**## Documentación de Soporte y Consistencia (E6 - E7)**
+## Documentación de Soporte y Consistencia (E6 - E7)
 - **Historia de Usuario:** [HU-08 - Enviar y Sincronizar Reporte Offline](docs/desing/historia.md)
 - **Análisis Round-Trip:** [Informe de Ingeniería Directa e Inversa](docs/desing/round-trip.md)
 - **Reglas C1-C5:** [Auditoría de Consistencia de Diagramas](docs/desing/consistencia.md)
