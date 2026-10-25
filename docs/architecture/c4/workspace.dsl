@@ -14,7 +14,6 @@ workspace "SismoReporta AQP" "Modelo C4 del Sistema Offline-First de Reporte Sí
             
             # --- COMPONENTES (Nivel 3) ---
             api = container "API SismoReporta" "Monolito modular que procesa la ingesta de reportes, mapas y gestión de brigadas." "Python / FastAPI" {
-                
                 ingesta = component "Módulo Ingesta" "Recibe, valida y gestiona la persistencia de reportes de daños." "FastAPI Router / Python"
                 gis = component "Módulo GIS / Mapa" "Procesa coordenadas geoespaciales y calcula mapas de calor." "GeoPandas / Python"
                 brigadas = component "Módulo Brigadas" "Gestiona asignación, rutas y estados de atención de brigadas." "FastAPI Router / Python"
@@ -22,7 +21,6 @@ workspace "SismoReporta AQP" "Modelo C4 del Sistema Offline-First de Reporte Sí
             }
             
             cola = container "Cola de Mensajes" "Gestiona la cola de tareas asíncronas para procesamiento de imágenes y alertas." "Redis" "Queue"
-            
             db = container "Base de Datos Geoespacial" "Almacena usuarios, reportes de daños, estados y geometrías GIS." "PostgreSQL 16 + PostGIS" "Database"
         }
 
@@ -64,6 +62,20 @@ workspace "SismoReporta AQP" "Modelo C4 del Sistema Offline-First de Reporte Sí
         sismoReporta.api.infraestructura -> sismoReporta.cola "Encola mensajes" "Redis protocol"
         sismoReporta.api.infraestructura -> s3 "Sube archivos" "HTTPS"
         sismoReporta.api.infraestructura -> sms "Despacha alertas" "HTTPS"
+
+        # --- ENTORNO DE DESPLIEGUE (E5) ---
+        produccion = deploymentEnvironment "Producción" {
+            deploymentNode "Smartphone del Ciudadano" "" "Android / iOS (Navegador Web PWA)" {
+                containerInstance sismoReporta.pwa
+            }
+            deploymentNode "VPS en la Nube" "" "Ubuntu 24.04 LTS, 2 vCPU, 4 GB RAM" {
+                deploymentNode "Docker Compose" "" "Docker v27" {
+                    containerInstance sismoReporta.api
+                    containerInstance sismoReporta.cola
+                    containerInstance sismoReporta.db
+                }
+            }
+        }
     }
 
     views {
@@ -78,6 +90,20 @@ workspace "SismoReporta AQP" "Modelo C4 del Sistema Offline-First de Reporte Sí
         }
 
         component sismoReporta.api "Componentes" "Nivel 3: Diagrama de Componentes de la API SismoReporta" {
+            include *
+            autolayout lr
+        }
+
+        dynamic sismoReporta.api "SincronizarReporteOffline" "Dinámico: Flujo de sincronización offline al recuperar conectividad." {
+            sismoReporta.pwa -> sismoReporta.api.ingesta "1. POST /api/v1/reportes/sincronizar"
+            sismoReporta.api.ingesta -> sismoReporta.api.gis "2. Procesa y valida geometría GIS"
+            sismoReporta.api.ingesta -> sismoReporta.api.infraestructura "3. Guarda reporte en BD"
+            sismoReporta.api.infraestructura -> sismoReporta.db "4. INSERT INTO reportes"
+            sismoReporta.api.infraestructura -> sismoReporta.cola "5. Encola tarea de notificación SMS"
+            autolayout lr
+        }
+
+        deployment sismoReporta produccion "Despliegue" "Nivel 4: Diagrama de Despliegue en Producción (MVP)." {
             include *
             autolayout lr
         }
