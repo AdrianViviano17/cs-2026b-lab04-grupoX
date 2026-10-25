@@ -92,3 +92,30 @@ C4Context
     Rel(sismo, mapas, "Consulta mapas tiles", "HTTPS/REST")
     Rel(sismo, s3, "Almacena fotos de evidencia", "HTTPS/API")
     Rel(sismo, sms, "Envía notificaciones de emergencia", "HTTPS/REST")
+```
+---
+
+## Patrones de Diseño (Lab 07) - SismoReporta AQP
+
+### Resumen de Patrones Aplicados
+- **Strategy + Adapter + Factory:** Aislamiento de proveedores de envío SMS (Twilio, SMS Local).
+- **State Pattern:** Control del ciclo de vida del reporte (`Borrador` -> `Recibido` -> `Verificado`).
+- **Observer Pattern:** Publicación desintegrada hacia brigadas y tableros.
+- **Chain of Responsibility + Decorator:** Inferencia de severidad por IA con guardrails y caché local.
+
+### Tabla de Métricas de Refactorización
+| Métrica | Antes (`antes/servicio.py`) | Después (`servicio.py`) |
+| :--- | :--- | :--- |
+| Complejidad Ciclomática Máxima | **14 (Riesgo B)** | **2 (Rango A)** |
+| Resultado de Pruebas Automated | 100% Passed (`pytest`) | 100% Passed (`pytest`) |
+
+### Documentación de Diseño y Entregables
+- **Olores y Decisiones (E1):** [`docs/design/olores.md`](docs/design/olores.md)
+- **Métricas Radon y Trade-Off (E6):** [`docs/design/metricas.md`](docs/design/metricas.md)
+- **ADR-005 Patrones de Diseño (E8):** [`docs/architecture/adr/005-patrones-de-diseno.md`](docs/architecture/adr/005-patrones-de-diseno.md)
+- **Bitácora de IA Generativa (E7):** [`docs/design/bitacora-ia.md`](docs/design/bitacora-ia.md)
+
+
+
+
+
