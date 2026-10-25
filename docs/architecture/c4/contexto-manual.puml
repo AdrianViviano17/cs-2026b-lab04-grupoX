@@ -1,0 +1,23 @@
+@startuml contexto-manual
+!include <C4/C4_Context>
+LAYOUT_LEFT_RIGHT()
+
+title Diagrama de Contexto de SismoReporta AQP (Escrito a mano)
+
+Person(ciudadano, "Ciudadano", "Persona afectada por un sismo que registra reportes de daños.")
+Person(brigadista, "Brigadista / Coordinador", "Personal de Defensa Civil que gestiona emergencias.")
+
+System(sismo, "SismoReporta AQP", "Permite registrar reportes sísmicos offline y gestionar la atención de emergencias.")
+
+System_Ext(mapas, "Servicio de Mapas", "Provee mapas tiles (OpenStreetMap/Mapbox).")
+System_Ext(s3, "Almacenamiento de Fotos", "AWS S3 para evidencia de daños.")
+System_Ext(sms, "Servicio de SMS", "Twilio para alertas críticas.")
+
+Rel(ciudadano, sismo, "Registra reportes de daños")
+Rel(brigadista, sismo, "Visualiza mapa de calor y asigna brigadas")
+Rel(sismo, mapas, "Consulta mapas tiles", "HTTPS/REST")
+Rel(sismo, s3, "Almacena fotos de evidencia", "HTTPS/API")
+Rel(sismo, sms, "Envía notificaciones de emergencia", "HTTPS/REST")
+
+SHOW_LEGEND()
+@enduml
