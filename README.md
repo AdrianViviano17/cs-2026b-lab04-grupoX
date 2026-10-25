@@ -68,4 +68,27 @@ stateDiagram-v2
 - **Análisis Round-Trip:** [Informe de Ingeniería Directa e Inversa](docs/desing/round-trip.md)
 - **Reglas C1-C5:** [Auditoría de Consistencia de Diagramas](docs/desing/consistencia.md)
 - **Uso de IA:** [Bitácora de Interacciones y Prompts](docs/design/bitacora-ia.md)
-- **Código Fuente:** [Esqueleto de Dominio en Python](src/reportes/dominio.py)    
+- **Código Fuente:** [Esqueleto de Dominio en Python](src/reportes/dominio.py)
+---
+
+## Arquitectura C4 (Lab 06) - SismoReporta AQP
+
+### Diagrama de Contexto (Mermaid C4)
+```mermaid
+C4Context
+    title Nivel 1: Contexto del Sistema SismoReporta AQP
+    
+    Person(ciudadano, "Ciudadano", "Persona afectada por un sismo que registra reportes de daños.")
+    Person(brigadista, "Brigadista / Coordinador", "Personal de Defensa Civil que gestiona la emergencia.")
+
+    System(sismo, "SismoReporta AQP", "Permite registrar reportes sísmicos offline y gestionar emergencias.")
+
+    System_Ext(mapas, "Servicio de Mapas", "Provee mapas tiles e imágenes satelitales.")
+    System_Ext(s3, "Almacenamiento de Fotos", "AWS S3 para evidencia de daños.")
+    System_Ext(sms, "Servicio de SMS", "Twilio para alertas críticas por SMS.")
+
+    Rel(ciudadano, sismo, "Registra reportes de daños")
+    Rel(brigadista, sismo, "Visualiza mapa de calor y asigna brigadas")
+    Rel(sismo, mapas, "Consulta mapas tiles", "HTTPS/REST")
+    Rel(sismo, s3, "Almacena fotos de evidencia", "HTTPS/API")
+    Rel(sismo, sms, "Envía notificaciones de emergencia", "HTTPS/REST")
