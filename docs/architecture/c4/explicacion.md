@@ -1,0 +1,3 @@
+SismoReporta AQP es una aplicación diseñada para que los ciudadanos de Arequipa puedan registrar reportes de daños tras un sismo, incluso cuando no tienen conexión a Internet. La información se guarda de forma segura en el teléfono celular y se envía automáticamente en cuanto se recupera la señal. 
+
+El personal de Defensa Civil utiliza el sistema para visualizar mapas de calor con los puntos más afectados y coordinar la atención rápida de brigadas de emergencia. Para funcionar, el sistema se apoya en servicios externos que proporcionan mapas satelitales, almacenan fotos de evidencias y envían alertas de emergencia por mensajería SMS.
