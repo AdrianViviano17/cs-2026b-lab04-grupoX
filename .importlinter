@@ -5,12 +5,13 @@ root_package = src
 name = FF-01 Capas del Monolito Modular sin Ciclos (ADR-001)
 type = layers
 layers =
+    reportes.servicio
     reportes.dominio
     reportes.estrategias | reportes.estados | reportes.eventos | reportes.ia
     reportes.externos
 
 [importlinter:contract:puertos]
-name = FF-02 Solo Dominio conoce Adaptadores de Infraestructura (ADR-005)
+name = FF-02 Solo Servicio y Dominio conocen Adaptadores de Infraestructura (ADR-005)
 type = forbidden
 source_modules =
     reportes.estados
