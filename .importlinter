@@ -7,7 +7,10 @@ type = layers
 layers =
     reportes.servicio
     reportes.dominio
-    reportes.estrategias, reportes.estados, reportes.eventos, reportes.ia
+    reportes.estrategias
+    reportes.estados
+    reportes.eventos
+    reportes.ia
     reportes.externos
 
 [importlinter:contract:puertos]
