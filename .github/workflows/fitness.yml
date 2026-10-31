@@ -1,0 +1,26 @@
+name: fitness-functions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  evaluar-arquitectura:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Instalar dependencias
+        run: |
+          pip install pytest import-linter
+      - name: Verificar Contratos Estructurales (import-linter)
+        run: |
+          lint-imports
+      - name: Ejecutar Fitness Functions de Calidad (pytest)
+        run: |
+          pytest tests/test_fitness.py -v
