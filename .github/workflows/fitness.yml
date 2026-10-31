@@ -28,4 +28,4 @@ jobs:
 
       - name: Ejecutar Fitness Functions de Calidad (pytest)
         run: |
-          PYTHONPATH=src pytest tests/test_fitness.py -v
+          PYTHONPATH=. pytest tests/test_fitness.py -v
