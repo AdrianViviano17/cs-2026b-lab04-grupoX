@@ -132,7 +132,7 @@ C4Context
 - **Árbol de Utilidad (E1):** [`docs/architecture/utilidad/arbol.dot`](docs/architecture/utilidad/arbol.dot)
 - **Evaluación ATAM-Lite (E3/E7):** [`docs/architecture/atam-lite.md`](docs/architecture/atam-lite.md)
 - **Fitness Functions (E5):** [`.github/workflows/fitness.yml`](.github/workflows/fitness.yml)
-- **ADRs de Iteraciones (E6):** [`ADR-006`](docs/architecture/adr/006-rendimiento-indice-cache.md), [`ADR-007`](docs/architecture/adr/007-disponibilidad-outbox.md), [`ADR-008`](docs/architecture/adr/008-multitenencia-rls.md)
+- **ADRs de Iteraciones (E6):** [`ADR-006`](docs/architecture/adr/006-postgis-gist-index.md), [`ADR-007`](docs/architecture/adr/007-redis-cache-ia.md), [`ADR-008`](docs/architecture/adr/008-outbox-pattern.md)
 
 
 
