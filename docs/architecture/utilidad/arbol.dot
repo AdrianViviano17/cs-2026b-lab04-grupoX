@@ -1,0 +1,32 @@
+digraph ArbolUtilidad {
+    rankdir=LR;
+    node [shape=box, style=filled, fillcolor=lightgrey, fontname="Helvetica"];
+
+    Utilidad [label="Utilidad\nSismoReporta AQP", fillcolor="#08427B", fontcolor=white];
+
+    // Atributos
+    Rendimiento [label="Rendimiento", fillcolor="#1168BD", fontcolor=white];
+    Disponibilidad [label="Disponibilidad", fillcolor="#1168BD", fontcolor=white];
+    Seguridad [label="Seguridad", fillcolor="#1168BD", fontcolor=white];
+    Modificabilidad [label="Modificabilidad", fillcolor="#1168BD", fontcolor=white];
+
+    Utilidad -> Rendimiento;
+    Utilidad -> Disponibilidad;
+    Utilidad -> Seguridad;
+    Utilidad -> Modificabilidad;
+
+    // Escenarios
+    QA01 [label="(H,H) QA-01: 20k reportes/hora en simulacro\n p95 de ingesta <= 2.0 s", fillcolor="#85BBF0"];
+    QA02 [label="(H,H) QA-02: Red movil cae por 2 horas\n 0% reportes perdidos (Outbox)", fillcolor="#85BBF0"];
+    QA03 [label="(H,M) QA-03: Reconexion de señal\n Sincroniza 100 reportes en <= 30 s", fillcolor="#D9EAD3"];
+    QA04 [label="(H,M) QA-04: Aislamiento por distrito/sector\n 0 accesos no autorizados a datos de otro sector", fillcolor="#D9EAD3"];
+    QA05 [label="(M,L) QA-05: Cifrado de datos de ciudadanos\n Cumple Ley 29733 (HTTPS + disco cifrado)", fillcolor="#EEEEEE"];
+    QA06 [label="(M,M) QA-06: Incorporar nueva brigada/distrito\n Integracion en <= 1 dia sin desplegar codigo", fillcolor="#EEEEEE"];
+
+    Rendimiento -> QA01;
+    Disponibilidad -> QA02;
+    Disponibilidad -> QA03;
+    Seguridad -> QA04;
+    Seguridad -> QA05;
+    Modificabilidad -> QA06;
+}
