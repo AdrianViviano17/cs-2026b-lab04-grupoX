@@ -33,7 +33,7 @@ class Reporte:
     estado: EstadoReporte = EstadoReporte.BORRADOR
     detalles: List[DetalleDanio] = field(default_factory=list)
 
-    def guardar_localmente((self) -> None:
+    def guardar_localmente(self) -> None:
         self.estado = EstadoReporte.ENCOLADO
 
     def sincronizar(self) -> None:
