@@ -1,7 +1,7 @@
-from src.reportes.estados import Borrador, Encolado
-from src.reportes.estrategias import FabricaCanalesSMS, TwilioAdapter, LocalSMSAdapter
-from src.reportes.eventos import PublicadorEventos, NotificadorBrigadas, ActualizadorTablero
-from src.reportes.ia import ClasificadorLocal, ConCacheIA, GuardrailLongitudMinima, GuardrailLenguajeProhibido
+from reportes.estados import Borrador, Encolado
+from reportes.estrategias import FabricaCanalesSMS, TwilioAdapter, LocalSMSAdapter
+from reportes.eventos import PublicadorEventos, NotificadorBrigadas, ActualizadorTablero
+from reportes.ia import ClasificadorLocal, ConCacheIA, GuardrailLongitudMinima, GuardrailLenguajeProhibido
 
 class Reporte:
     def __init__(self, id_reporte: int, ciudadano_phone: str, descripcion: str, lat: float, lon: float):
