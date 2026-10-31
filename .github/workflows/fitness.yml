@@ -24,8 +24,8 @@ jobs:
 
       - name: Verificar Contratos Estructurales (import-linter)
         run: |
-          PYTHONPATH=. lint-imports
+          PYTHONPATH=src lint-imports
 
       - name: Ejecutar Fitness Functions de Calidad (pytest)
         run: |
-          PYTHONPATH=. pytest tests/test_fitness.py -v
+          PYTHONPATH=src pytest tests/test_fitness.py -v
