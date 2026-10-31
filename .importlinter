@@ -1,5 +1,5 @@
 [importlinter]
-root_package = src
+root_package = reportes
 
 [importlinter:contract:capas]
 name = FF-01 Capas del Monolito Modular sin Ciclos (ADR-001)
