@@ -119,7 +119,7 @@ C4Context
 
 ## Diseño de Arquitectura Guiado por Atributos de Calidad (Lab 08)
 
-[![fitness-functions](https://github.com/tu-usuario/nombre-repo/actions/workflows/fitness.yml/badge.svg)](https://github.com/tu-usuario/nombre-repo/actions/workflows/fitness.yml)
+[![fitness-functions](https://github.com/AdrianViviano17/cs-2026b-lab04-grupoX/actions/workflows/fitness.yml/badge.svg)](https://github.com/AdrianViviano17/cs-2026b-lab04-grupoX/actions/workflows/fitness.yml)
 
 ### Resumen de Iteraciones ADD
 | Iteración | Escenario Objetivo | Táctica Seleccionada | Evidencia Cuantitativa | ¿Cumple? |
