@@ -115,7 +115,24 @@ C4Context
 - **ADR-005 Patrones de Diseño (E8):** [`docs/architecture/adr/005-patrones-de-diseno.md`](docs/architecture/adr/005-patrones-de-diseno.md)
 - **Bitácora de IA Generativa (E7):** [`docs/design/bitacora-ia.md`](docs/design/bitacora-ia.md)
 
+---
 
+## Diseño de Arquitectura Guiado por Atributos de Calidad (Lab 08)
+
+[![fitness-functions](https://github.com/tu-usuario/nombre-repo/actions/workflows/fitness.yml/badge.svg)](https://github.com/tu-usuario/nombre-repo/actions/workflows/fitness.yml)
+
+### Resumen de Iteraciones ADD
+| Iteración | Escenario Objetivo | Táctica Seleccionada | Evidencia Cuantitativa | ¿Cumple? |
+| :--- | :--- | :--- | :--- | :--- |
+| **Iteración 1** | **QA-01 (Rendimiento):** 20k reportes/hora en simulacro | Índice PostGIS + Caché Redis | $p95$ simulado redujo de 16.8 s a **122 ms** | ✅ SÍ |
+| **Iteración 2** | **QA-02 (Disponibilidad):** Caída de red móvil | Patrón Outbox + Reintentos | 0% reportes perdidos en simulación Monte Carlo | ✅ SÍ |
+| **Iteración 3** | **QA-04 (Seguridad):** Aislamiento entre sectores | Claim JWT + RLS en PostgreSQL | Aislamiento verificado por Fitness Function | ✅ SÍ |
+
+### Artefactos Generados
+- **Árbol de Utilidad (E1):** [`docs/architecture/utilidad/arbol.dot`](docs/architecture/utilidad/arbol.dot)
+- **Evaluación ATAM-Lite (E3/E7):** [`docs/architecture/atam-lite.md`](docs/architecture/atam-lite.md)
+- **Fitness Functions (E5):** [`.github/workflows/fitness.yml`](.github/workflows/fitness.yml)
+- **ADRs de Iteraciones (E6):** [`ADR-006`](docs/architecture/adr/006-rendimiento-indice-cache.md), [`ADR-007`](docs/architecture/adr/007-disponibilidad-outbox.md), [`ADR-008`](docs/architecture/adr/008-multitenencia-rls.md)
 
 
 
