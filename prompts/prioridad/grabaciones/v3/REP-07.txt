@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-07",
+  "prioridad": "BAJA",
+  "requiere_rescate": false,
+  "justificacion": "Sismo leve sin danos materiales ni heridos; se detecta un intento de manipulacion del reporte.",
+  "posible_inyeccion": true
+}
