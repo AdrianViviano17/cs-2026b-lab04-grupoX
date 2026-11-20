@@ -1,0 +1,155 @@
+{
+  "historia_id": "SR-01",
+  "invest_ok": true,
+  "preguntas": [
+    "¿Qué distritos de Arequipa estarán disponibles para seleccionar?",
+    "¿Qué escala de intensidad sísmica se utilizará?",
+    "¿El reporte permitirá enviarse mediante web y SMS?",
+    "¿Se permitirá enviar reportes sin conexión a internet mediante SMS?",
+    "¿Se registrará automáticamente la fecha y hora del reporte?"
+  ],
+  "escenarios": [
+    {
+      "titulo": "Registro exitoso de un reporte de sismo",
+      "tipo": "exito",
+      "dado": [
+        "Que el ciudadano se encuentra en Arequipa",
+        "Que selecciona un distrito válido",
+        "Que indica una intensidad sísmica permitida"
+      ],
+      "cuando": "Cuando envía el reporte mediante la plataforma web",
+      "entonces": [
+        "El sistema registra el reporte correctamente",
+        "El reporte almacena el distrito y la intensidad percibida",
+        "El sistema confirma que el reporte fue enviado",
+        "El reporte queda disponible para las brigadas locales"
+      ]
+    },
+    {
+      "titulo": "Envío de reporte mediante SMS",
+      "tipo": "exito",
+      "dado": [
+        "Que el ciudadano dispone de un teléfono con capacidad para enviar SMS",
+        "Que el mensaje contiene un distrito válido y una intensidad permitida"
+      ],
+      "cuando": "Cuando envía el SMS al número habilitado por el sistema",
+      "entonces": [
+        "El sistema recibe y procesa el mensaje",
+        "El sistema registra el reporte con los datos proporcionados",
+        "El ciudadano recibe una confirmación de recepción"
+      ]
+    },
+    {
+      "titulo": "Envío sin seleccionar distrito",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano se encuentra en el formulario de reporte",
+        "Que no ha seleccionado ningún distrito"
+      ],
+      "cuando": "Cuando intenta enviar el reporte",
+      "entonces": [
+        "El sistema rechaza el envío",
+        "El sistema muestra un mensaje indicando que debe seleccionar un distrito",
+        "El reporte no se registra"
+      ]
+    },
+    {
+      "titulo": "Envío sin indicar intensidad",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano ha seleccionado un distrito válido",
+        "Que no ha indicado la intensidad percibida"
+      ],
+      "cuando": "Cuando intenta enviar el reporte",
+      "entonces": [
+        "El sistema impide el envío",
+        "El sistema solicita completar el campo de intensidad",
+        "El reporte no se registra"
+      ]
+    },
+    {
+      "titulo": "Selección de un distrito no válido",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano intenta registrar un reporte",
+        "Que proporciona un distrito que no pertenece a Arequipa o no está registrado"
+      ],
+      "cuando": "Cuando envía el reporte",
+      "entonces": [
+        "El sistema rechaza el distrito ingresado",
+        "El sistema muestra un mensaje de validación",
+        "El reporte no se registra"
+      ]
+    },
+    {
+      "titulo": "Ingreso de intensidad fuera del rango permitido",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano ha seleccionado un distrito válido",
+        "Que ingresa una intensidad fuera de la escala establecida"
+      ],
+      "cuando": "Cuando intenta enviar el reporte",
+      "entonces": [
+        "El sistema rechaza el valor ingresado",
+        "El sistema informa que la intensidad no es válida",
+        "El reporte no se registra"
+      ]
+    },
+    {
+      "titulo": "Envío de reporte con campos vacíos",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano abre el formulario de reporte",
+        "Que los campos de distrito e intensidad están vacíos"
+      ],
+      "cuando": "Cuando presiona el botón de enviar",
+      "entonces": [
+        "El sistema identifica los campos obligatorios sin completar",
+        "El sistema muestra los mensajes de validación correspondientes",
+        "El sistema no registra el reporte"
+      ]
+    },
+    {
+      "titulo": "Envío de reportes consecutivos",
+      "tipo": "borde",
+      "dado": [
+        "Que el ciudadano ya ha enviado un reporte de sismo",
+        "Que posteriormente intenta enviar otro reporte"
+      ],
+      "cuando": "Cuando envía un segundo reporte con información válida",
+      "entonces": [
+        "El sistema procesa el nuevo reporte",
+        "El sistema registra ambos reportes de manera independiente",
+        "El sistema evita sobrescribir el reporte anterior"
+      ]
+    },
+    {
+      "titulo": "Falla en la conexión durante el envío",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano ha completado correctamente los datos del reporte",
+        "Que se interrumpe la conexión durante el envío mediante web"
+      ],
+      "cuando": "Cuando intenta enviar el reporte",
+      "entonces": [
+        "El sistema informa que no fue posible completar el envío",
+        "El sistema evita confirmar un reporte que no fue registrado",
+        "El ciudadano puede intentar enviar nuevamente el reporte"
+      ]
+    },
+    {
+      "titulo": "Envío de reporte con intensidad mínima o máxima permitida",
+      "tipo": "borde",
+      "dado": [
+        "Que el ciudadano selecciona un distrito válido",
+        "Que indica una intensidad correspondiente al límite inferior o superior de la escala permitida"
+      ],
+      "cuando": "Cuando envía el reporte",
+      "entonces": [
+        "El sistema acepta la intensidad si pertenece al rango establecido",
+        "El sistema registra correctamente el reporte",
+        "El sistema confirma la recepción"
+      ]
+    }
+  ]
+}
