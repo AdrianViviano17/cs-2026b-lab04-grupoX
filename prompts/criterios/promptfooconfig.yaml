@@ -1,8 +1,6 @@
 description: "Evaluacion de Prompts Tarea A - Criterios de Aceptacion (SismoReporta AQP)"
 
 prompts:
-  - file://v1.txt
-  - file://v2.txt
   - file://v3.txt
 
 providers:
