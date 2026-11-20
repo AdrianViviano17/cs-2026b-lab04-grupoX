@@ -1,0 +1,57 @@
+{
+  "historia_id": "SR-03",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Filtrado de reportes por distrito",
+      "tipo": "exito",
+      "dado": [
+        "El coordinador de defensa civil accede a los reportes recibidos",
+        "Existen reportes de los distritos de Mariano Melgar, Cayma y Cerro Colorado"
+      ],
+      "cuando": "Selecciona el distrito de Cayma como filtro",
+      "entonces": [
+        "El sistema muestra únicamente los reportes correspondientes a Cayma",
+        "Los reportes de Mariano Melgar y Cerro Colorado no aparecen en los resultados"
+      ]
+    },
+    {
+      "titulo": "Cambio de distrito seleccionado",
+      "tipo": "exito",
+      "dado": [
+        "El coordinador está visualizando los reportes de Mariano Melgar"
+      ],
+      "cuando": "Cambia el filtro al distrito de Cerro Colorado",
+      "entonces": [
+        "El sistema actualiza los resultados",
+        "Se muestran únicamente los reportes de Cerro Colorado"
+      ]
+    },
+    {
+      "titulo": "Distrito sin reportes recibidos",
+      "tipo": "borde",
+      "dado": [
+        "El coordinador selecciona el distrito de Yanahuara",
+        "No existen reportes recibidos de ese distrito"
+      ],
+      "cuando": "Aplica el filtro",
+      "entonces": [
+        "El sistema muestra que no se encontraron reportes para el distrito seleccionado",
+        "El sistema no muestra reportes de otros distritos"
+      ]
+    },
+    {
+      "titulo": "Consulta sin seleccionar un distrito",
+      "tipo": "borde",
+      "dado": [
+        "El coordinador accede a los reportes recibidos",
+        "No selecciona ningún distrito como filtro"
+      ],
+      "cuando": "Consulta los resultados",
+      "entonces": [
+        "El sistema muestra los reportes sin restringirlos a un distrito específico"
+      ]
+    }
+  ]
+}
