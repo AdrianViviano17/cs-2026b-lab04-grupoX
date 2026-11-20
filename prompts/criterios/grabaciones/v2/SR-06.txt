@@ -1,0 +1,155 @@
+{
+  "historia_id": "SR-06",
+  "invest_ok": false,
+  "preguntas": [
+    "¿Qué tiempo máximo de respuesta debe tener la aplicación para operaciones habituales?",
+    "¿Cuántos usuarios simultáneos debe soportar el sistema durante un sismo?",
+    "¿Cuántos reportes por segundo debe poder procesar la plataforma?",
+    "¿Cuál es el tiempo máximo permitido de interrupción del servicio?",
+    "¿El sistema debe continuar recibiendo reportes SMS cuando la plataforma web esté saturada?",
+    "¿Qué porcentaje de disponibilidad se espera durante una emergencia sísmica?",
+    "¿Se requiere que el sistema recupere automáticamente los servicios después de una caída?"
+  ],
+  "escenarios": [
+    {
+      "titulo": "Respuesta rápida al consultar la plataforma",
+      "tipo": "exito",
+      "dado": [
+        "Que la aplicación se encuentra operativa",
+        "Que existe una carga normal de usuarios"
+      ],
+      "cuando": "Cuando un ciudadano accede a la plataforma",
+      "entonces": [
+        "El sistema carga la página principal en un tiempo máximo de 2 segundos",
+        "El sistema permite acceder a las funcionalidades principales sin demoras excesivas"
+      ]
+    },
+    {
+      "titulo": "Procesamiento de múltiples reportes simultáneos",
+      "tipo": "exito",
+      "dado": [
+        "Que el sistema recibe múltiples reportes durante un sismo",
+        "Que la cantidad de solicitudes se encuentra dentro de la capacidad máxima establecida"
+      ],
+      "cuando": "Cuando los ciudadanos envían reportes simultáneamente",
+      "entonces": [
+        "El sistema procesa las solicitudes sin perder información",
+        "Cada reporte válido queda registrado correctamente",
+        "El sistema mantiene un tiempo de respuesta dentro del límite establecido"
+      ]
+    },
+    {
+      "titulo": "Saturación por exceso de solicitudes",
+      "tipo": "error",
+      "dado": [
+        "Que el sistema recibe una cantidad de solicitudes superior a su capacidad máxima",
+        "Que existe riesgo de saturación de los servicios"
+      ],
+      "cuando": "Cuando se supera el límite de solicitudes concurrentes",
+      "entonces": [
+        "El sistema gestiona las solicitudes mediante mecanismos de control de carga",
+        "El sistema evita la pérdida o duplicación de reportes confirmados",
+        "El sistema informa cuando una solicitud no puede procesarse",
+        "El sistema permite reintentar las operaciones fallidas"
+      ]
+    },
+    {
+      "titulo": "Recepción de reportes SMS durante una caída de internet",
+      "tipo": "exito",
+      "dado": [
+        "Que la plataforma web presenta problemas de conectividad",
+        "Que el servicio de recepción SMS continúa operativo",
+        "Que los ciudadanos disponen de señal de telefonía móvil"
+      ],
+      "cuando": "Cuando los ciudadanos envían reportes mediante SMS",
+      "entonces": [
+        "El sistema recibe los mensajes SMS",
+        "El sistema procesa los reportes válidos",
+        "Los reportes quedan almacenados para su posterior consulta"
+      ]
+    },
+    {
+      "titulo": "Recuperación automática después de una interrupción",
+      "tipo": "exito",
+      "dado": [
+        "Que uno de los servicios de la aplicación deja de funcionar temporalmente",
+        "Que los mecanismos de recuperación están habilitados"
+      ],
+      "cuando": "Cuando se restablece la infraestructura del servicio",
+      "entonces": [
+        "El sistema recupera sus funcionalidades principales",
+        "Los reportes previamente registrados permanecen almacenados",
+        "El sistema permite continuar recibiendo nuevos reportes"
+      ]
+    },
+    {
+      "titulo": "Protección de reportes ante una falla del servidor",
+      "tipo": "error",
+      "dado": [
+        "Que el sistema está procesando reportes sísmicos",
+        "Que ocurre una falla inesperada en el servidor"
+      ],
+      "cuando": "Cuando se interrumpe el servicio durante el procesamiento",
+      "entonces": [
+        "El sistema conserva los reportes cuyo registro fue confirmado",
+        "El sistema evita almacenar registros incompletos como reportes válidos",
+        "El sistema permite recuperar la información mediante mecanismos de respaldo"
+      ]
+    },
+    {
+      "titulo": "Funcionamiento bajo carga máxima esperada",
+      "tipo": "borde",
+      "dado": [
+        "Que el sistema se encuentra sometido a su carga máxima de usuarios concurrentes definida para las pruebas"
+      ],
+      "cuando": "Cuando los usuarios realizan consultas y envían reportes simultáneamente",
+      "entonces": [
+        "El sistema mantiene los tiempos de respuesta dentro de los límites establecidos",
+        "El sistema procesa correctamente las operaciones permitidas",
+        "El sistema no presenta errores críticos ni pérdida de información"
+      ]
+    },
+    {
+      "titulo": "Disponibilidad de los servicios durante una emergencia",
+      "tipo": "exito",
+      "dado": [
+        "Que la aplicación se encuentra desplegada en producción",
+        "Que se produce un incremento significativo de usuarios debido a un sismo"
+      ],
+      "cuando": "Cuando los ciudadanos intentan acceder a los servicios de la plataforma",
+      "entonces": [
+        "El sistema mantiene una disponibilidad mínima del 99,9 % según el periodo de medición establecido",
+        "Las funcionalidades de registro y consulta de reportes permanecen disponibles",
+        "El sistema registra y monitorea los errores del servicio"
+      ]
+    },
+    {
+      "titulo": "Incremento repentino de solicitudes",
+      "tipo": "borde",
+      "dado": [
+        "Que el sistema recibe una cantidad habitual de solicitudes",
+        "Que ocurre un incremento repentino de ciudadanos intentando reportar un sismo"
+      ],
+      "cuando": "Cuando aumenta considerablemente el tráfico de la aplicación",
+      "entonces": [
+        "El sistema distribuye la carga entre los recursos disponibles",
+        "El sistema prioriza las operaciones críticas de recepción de reportes",
+        "El sistema evita interrupciones generales del servicio"
+      ]
+    },
+    {
+      "titulo": "Verificación de integridad después de la recuperación",
+      "tipo": "exito",
+      "dado": [
+        "Que el sistema ha experimentado una interrupción",
+        "Que los servicios han sido recuperados"
+      ],
+      "cuando": "Cuando se realiza una verificación de los reportes almacenados",
+      "entonces": [
+        "El sistema conserva la integridad de los datos registrados",
+        "No existen reportes duplicados como consecuencia de la recuperación",
+        "Los códigos de seguimiento continúan asociados a sus reportes originales"
+      ]
+    }
+  ]
+}
