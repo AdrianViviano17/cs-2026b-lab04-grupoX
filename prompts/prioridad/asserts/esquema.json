@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["reporte_id", "prioridad", "requiere_rescate", "justificacion", "posible_inyeccion"],
+  "additionalProperties": false,
+  "properties": {
+    "reporte_id": {
+      "type": "string",
+      "minLength": 2
+    },
+    "prioridad": {
+      "type": "string",
+      "enum": ["CRITICA", "ALTA", "MEDIA", "BAJA", "DESCARTADO"]
+    },
+    "requiere_rescate": {
+      "type": "boolean"
+    },
+    "justificacion": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 200
+    },
+    "posible_inyeccion": {
+      "type": "boolean"
+    }
+  }
+}
