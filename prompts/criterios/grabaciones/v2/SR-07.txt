@@ -1,0 +1,201 @@
+{
+  "historia_id": "SR-07",
+  "invest_ok": true,
+  "preguntas": [
+    "¿Qué campos y tipos de datos debe contener la tabla reportes_sismicos?",
+    "¿La ubicación geográfica se almacenará mediante el tipo de dato geometry o geography?",
+    "¿Qué sistema de referencia espacial (SRID) se utilizará para las coordenadas?",
+    "¿La cola Redis almacenará reportes pendientes de procesamiento o también reportes procesados?",
+    "¿Qué política se utilizará para reintentar el procesamiento de reportes cuando ocurra un error?"
+  ],
+  "escenarios": [
+    {
+      "titulo": "Creación exitosa de la tabla reportes_sismicos",
+      "tipo": "exito",
+      "dado": [
+        "Que PostgreSQL y PostGIS se encuentran instalados y operativos",
+        "Que el usuario de base de datos tiene permisos para crear tablas"
+      ],
+      "cuando": "Cuando se ejecuta el script de creación de la tabla reportes_sismicos",
+      "entonces": [
+        "El sistema crea correctamente la tabla reportes_sismicos",
+        "La tabla contiene los campos definidos en el modelo de datos",
+        "La tabla permite almacenar la información de los reportes sísmicos",
+        "La estructura de la tabla queda disponible para las operaciones CRUD"
+      ]
+    },
+    {
+      "titulo": "Creación del índice espacial GiST",
+      "tipo": "exito",
+      "dado": [
+        "Que la tabla reportes_sismicos existe",
+        "Que PostGIS está habilitado en la base de datos",
+        "Que la tabla contiene un campo de ubicación geográfica"
+      ],
+      "cuando": "Cuando se ejecuta la creación del índice espacial GiST sobre el campo de ubicación",
+      "entonces": [
+        "El sistema crea correctamente el índice GiST",
+        "El índice queda asociado al campo espacial de la tabla",
+        "PostgreSQL reconoce el índice como un índice espacial GiST",
+        "Las consultas espaciales pueden utilizar el índice para optimizar su ejecución"
+      ]
+    },
+    {
+      "titulo": "Almacenamiento de coordenadas geográficas",
+      "tipo": "exito",
+      "dado": [
+        "Que la tabla reportes_sismicos está creada",
+        "Que el ciudadano envía un reporte con coordenadas geográficas válidas"
+      ],
+      "cuando": "Cuando el sistema almacena el reporte sísmico",
+      "entonces": [
+        "El sistema guarda correctamente la ubicación geográfica",
+        "Las coordenadas se almacenan utilizando el tipo espacial definido",
+        "El registro conserva el SRID establecido para el proyecto"
+      ]
+    },
+    {
+      "titulo": "Rechazo de coordenadas geográficas inválidas",
+      "tipo": "error",
+      "dado": [
+        "Que la tabla reportes_sismicos está operativa",
+        "Que se intenta almacenar un reporte con coordenadas fuera del rango permitido"
+      ],
+      "cuando": "Cuando el sistema intenta insertar el reporte",
+      "entonces": [
+        "El sistema rechaza las coordenadas inválidas",
+        "La base de datos no almacena una ubicación geográfica incorrecta",
+        "El sistema devuelve un error de validación"
+      ]
+    },
+    {
+      "titulo": "Creación exitosa de la cola Redis",
+      "tipo": "exito",
+      "dado": [
+        "Que el servicio Redis se encuentra instalado y operativo",
+        "Que la aplicación dispone de las credenciales y permisos necesarios"
+      ],
+      "cuando": "Cuando el sistema inicializa la cola de procesamiento de reportes",
+      "entonces": [
+        "La aplicación establece correctamente la conexión con Redis",
+        "La cola de reportes sísmicos queda disponible",
+        "El sistema puede insertar nuevos elementos en la cola",
+        "El sistema puede recuperar elementos pendientes de procesamiento"
+      ]
+    },
+    {
+      "titulo": "Envío de reportes a la cola Redis",
+      "tipo": "exito",
+      "dado": [
+        "Que Redis está operativo",
+        "Que existe un nuevo reporte sísmico válido"
+      ],
+      "cuando": "Cuando el sistema envía el reporte para su procesamiento asíncrono",
+      "entonces": [
+        "El sistema incorpora el reporte a la cola Redis",
+        "El elemento conserva los datos necesarios para su procesamiento",
+        "El sistema confirma que el reporte fue agregado correctamente a la cola"
+      ]
+    },
+    {
+      "titulo": "Procesamiento de reportes pendientes",
+      "tipo": "exito",
+      "dado": [
+        "Que la cola Redis contiene reportes pendientes",
+        "Que existe un trabajador de procesamiento disponible"
+      ],
+      "cuando": "Cuando el trabajador consume los elementos de la cola",
+      "entonces": [
+        "El sistema recupera los reportes pendientes",
+        "El sistema procesa cada reporte correctamente",
+        "Los reportes procesados se retiran de la cola según la política de confirmación establecida",
+        "El sistema evita procesar accidentalmente un mismo reporte más de una vez"
+      ]
+    },
+    {
+      "titulo": "Falla de conexión con Redis",
+      "tipo": "error",
+      "dado": [
+        "Que la aplicación intenta conectarse al servicio Redis",
+        "Que Redis no se encuentra disponible"
+      ],
+      "cuando": "Cuando el sistema intenta insertar un reporte en la cola",
+      "entonces": [
+        "El sistema identifica el fallo de conexión",
+        "El sistema registra el error correspondiente",
+        "El sistema no confirma el envío a la cola si este no se completó",
+        "El sistema permite reintentar la operación según la política establecida"
+      ]
+    },
+    {
+      "titulo": "Inserción de reportes con campos obligatorios vacíos",
+      "tipo": "error",
+      "dado": [
+        "Que la tabla reportes_sismicos está disponible",
+        "Que se intenta insertar un reporte sin completar uno o más campos obligatorios"
+      ],
+      "cuando": "Cuando se ejecuta la operación de inserción",
+      "entonces": [
+        "La base de datos rechaza el registro incompleto",
+        "Se aplican las restricciones NOT NULL correspondientes",
+        "No se almacena información inconsistente"
+      ]
+    },
+    {
+      "titulo": "Consulta espacial utilizando el índice GiST",
+      "tipo": "exito",
+      "dado": [
+        "Que la tabla reportes_sismicos contiene múltiples registros con ubicaciones geográficas",
+        "Que el índice espacial GiST está creado y actualizado"
+      ],
+      "cuando": "Cuando se ejecuta una consulta espacial para buscar reportes dentro de un área geográfica de Arequipa",
+      "entonces": [
+        "El sistema devuelve los reportes que cumplen el criterio espacial",
+        "La consulta puede utilizar el índice GiST para optimizar la búsqueda",
+        "Los resultados corresponden a las ubicaciones geográficas solicitadas"
+      ]
+    },
+    {
+      "titulo": "Inserción simultánea de múltiples reportes",
+      "tipo": "borde",
+      "dado": [
+        "Que la tabla reportes_sismicos y Redis se encuentran operativos",
+        "Que múltiples ciudadanos envían reportes simultáneamente"
+      ],
+      "cuando": "Cuando el sistema recibe y procesa las solicitudes concurrentes",
+      "entonces": [
+        "La base de datos registra los reportes válidos de manera independiente",
+        "Redis recibe los elementos correspondientes en la cola",
+        "No se pierden registros por concurrencia",
+        "Cada reporte conserva un identificador único"
+      ]
+    },
+    {
+      "titulo": "Inicialización cuando la tabla ya existe",
+      "tipo": "borde",
+      "dado": [
+        "Que la tabla reportes_sismicos ya existe en la base de datos"
+      ],
+      "cuando": "Cuando se ejecuta nuevamente el script de inicialización",
+      "entonces": [
+        "El sistema evita crear una tabla duplicada",
+        "La estructura existente permanece disponible",
+        "El proceso de inicialización finaliza sin errores inesperados"
+      ]
+    },
+    {
+      "titulo": "Recuperación de reportes pendientes después de una interrupción",
+      "tipo": "borde",
+      "dado": [
+        "Que Redis contiene reportes pendientes de procesamiento",
+        "Que el servicio de procesamiento se interrumpe inesperadamente"
+      ],
+      "cuando": "Cuando el servicio se reinicia y vuelve a conectarse a Redis",
+      "entonces": [
+        "El sistema recupera los reportes pendientes según la política de persistencia configurada",
+        "Los reportes no procesados permanecen disponibles",
+        "El sistema reanuda el procesamiento sin perder información confirmada"
+      ]
+    }
+  ]
+}
