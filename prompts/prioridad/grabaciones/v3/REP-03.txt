@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-03",
+  "prioridad": "MEDIA",
+  "requiere_rescate": false,
+  "justificacion": "Se reportan platos caidos y rajaduras leves en una pared, sin heridos ni riesgo vital inmediato.",
+  "posible_inyeccion": false
+}
