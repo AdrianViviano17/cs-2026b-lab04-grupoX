@@ -1,0 +1,55 @@
+{
+  "historia_id": "SR-08",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Marcado exitoso de un reporte como atendido",
+      "tipo": "exito",
+      "dado": [
+        "El brigadista tiene acceso a un reporte pendiente del distrito de Cayma"
+      ],
+      "cuando": "Marca el reporte como atendido",
+      "entonces": [
+        "El sistema actualiza el estado del reporte a atendido",
+        "El brigadista visualiza el nuevo estado del reporte"
+      ]
+    },
+    {
+      "titulo": "Consulta de un reporte previamente atendido",
+      "tipo": "exito",
+      "dado": [
+        "Un brigadista ya marcó como atendido un reporte del distrito de Mariano Melgar"
+      ],
+      "cuando": "Otro brigadista consulta ese reporte",
+      "entonces": [
+        "El sistema muestra que el reporte ya fue atendido",
+        "El reporte puede identificarse como una atención ya realizada"
+      ]
+    },
+    {
+      "titulo": "Intento de atender un reporte inexistente",
+      "tipo": "error",
+      "dado": [
+        "El brigadista intenta acceder a un reporte con código inexistente SR-999"
+      ],
+      "cuando": "Intenta marcarlo como atendido",
+      "entonces": [
+        "El sistema informa que el reporte no existe",
+        "El sistema no confirma una atención inexistente"
+      ]
+    },
+    {
+      "titulo": "Intento de marcar un reporte sin permisos",
+      "tipo": "error",
+      "dado": [
+        "Un ciudadano sin permisos de brigadista accede a un reporte pendiente de Cerro Colorado"
+      ],
+      "cuando": "Intenta marcar el reporte como atendido",
+      "entonces": [
+        "El sistema rechaza la acción",
+        "El estado del reporte permanece sin cambios"
+      ]
+    }
+  ]
+}
