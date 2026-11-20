@@ -1,0 +1,21 @@
+### **Criterios de aceptación – Historia de usuario: Marcar reporte como atendido**
+
+**HU:** Como brigadista, quiero marcar un reporte como atendido para evitar duplicar visitas.
+
+1\. **Identificación del reporte:** El sistema debe permitir al brigadista seleccionar un reporte pendiente de atención.
+
+2\. **Cambio de estado:** El sistema debe permitir cambiar el estado del reporte de "Pendiente" a "Atendido".
+
+3\. **Confirmación de atención:** El sistema debe solicitar una confirmación antes de registrar el cambio de estado.
+
+4\. **Registro de atención:** El sistema debe guardar automáticamente la fecha y hora en que el reporte fue marcado como atendido.
+
+5\. **Identificación del brigadista:** El sistema debe registrar qué brigadista realizó la atención del reporte.
+
+6\. **Actualización del tablero:** El sistema debe actualizar el estado del reporte para que los demás brigadistas puedan visualizar que ya fue atendido.
+
+7\. **Prevención de duplicidad:** El sistema debe impedir que un reporte marcado como atendido sea asignado nuevamente para una visita.
+
+8\. **Control de errores:** Si ocurre un problema al actualizar el estado, el sistema debe mostrar un mensaje indicando que la operación no pudo completarse.
+
+9\. **Historial de cambios:** El sistema debe conservar un registro de los cambios de estado realizados sobre cada reporte.
