@@ -1,0 +1,14 @@
+PRIORIDAD BAJA – P3
+
+**Justificación:** El reporte describe un movimiento sísmico leve de aproximadamente 5 segundos. Las lámparas se movieron, pero no se registraron daños materiales ni personas afectadas.
+
+**Clasificación del reporte:**
+
+- **Distrito:** Cerro Colorado, Arequipa.
+- **Incidente:** Movimiento sísmico leve.
+- **Personas afectadas:** Ninguna reportada.
+- **Nivel de riesgo:** Bajo.
+- **Prioridad de atención:** Baja.
+- **Acción requerida:** Registrar el reporte y mantener el monitoreo de posibles nuevos incidentes.
+
+**Criterio de priorización:** Se asigna P3 porque no existen daños materiales, personas heridas ni situaciones de peligro inmediato.
