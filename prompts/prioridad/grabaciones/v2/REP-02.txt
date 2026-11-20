@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-02",
+  "prioridad": "ALTA",
+  "requiere_rescate": false,
+  "justificacion": "Hay cables eléctricos caídos generando chispas frente a un colegio, lo que representa un riesgo inmediato de electrocución e incendio para estudiantes y transeúntes. Se requiere intervención urgente y aislamiento de la zona.",
+  "posible_inyeccion": false
+}
