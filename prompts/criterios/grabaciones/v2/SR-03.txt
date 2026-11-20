@@ -1,0 +1,173 @@
+{
+  "historia_id": "SR-03",
+  "invest_ok": true,
+  "preguntas": [
+    "¿El coordinador podrá seleccionar uno o varios distritos simultáneamente?",
+    "¿Los reportes se ordenarán por fecha, intensidad o cantidad de reportes?",
+    "¿El filtro incluirá reportes recibidos tanto por web como por SMS?",
+    "¿Se mostrarán únicamente reportes pendientes o también los atendidos?"
+  ],
+  "escenarios": [
+    {
+      "titulo": "Filtrar reportes por un distrito específico",
+      "tipo": "exito",
+      "dado": [
+        "Que el coordinador ha iniciado sesión en el sistema",
+        "Que existen reportes registrados de diferentes distritos de Arequipa"
+      ],
+      "cuando": "Cuando selecciona el distrito Mariano Melgar y aplica el filtro",
+      "entonces": [
+        "El sistema muestra únicamente los reportes correspondientes a Mariano Melgar",
+        "El sistema excluye los reportes de otros distritos",
+        "Los reportes mostrados conservan su información original"
+      ]
+    },
+    {
+      "titulo": "Filtrar reportes del distrito de Cayma",
+      "tipo": "exito",
+      "dado": [
+        "Que el coordinador ha iniciado sesión",
+        "Que existen reportes registrados del distrito de Cayma"
+      ],
+      "cuando": "Cuando selecciona Cayma como criterio de búsqueda",
+      "entonces": [
+        "El sistema muestra los reportes correspondientes a Cayma",
+        "Cada reporte presenta su distrito, intensidad y fecha de recepción",
+        "No se muestran reportes de otros distritos"
+      ]
+    },
+    {
+      "titulo": "Filtrar reportes del distrito de Cerro Colorado",
+      "tipo": "exito",
+      "dado": [
+        "Que existen reportes registrados de Cerro Colorado y otros distritos"
+      ],
+      "cuando": "Cuando el coordinador selecciona Cerro Colorado y aplica el filtro",
+      "entonces": [
+        "El sistema muestra únicamente los reportes de Cerro Colorado",
+        "El sistema actualiza los resultados según el distrito seleccionado"
+      ]
+    },
+    {
+      "titulo": "Filtrar por múltiples distritos",
+      "tipo": "exito",
+      "dado": [
+        "Que el coordinador ha iniciado sesión",
+        "Que existen reportes de Mariano Melgar, Cayma y Cerro Colorado"
+      ],
+      "cuando": "Cuando selecciona varios distritos y aplica el filtro",
+      "entonces": [
+        "El sistema muestra los reportes de todos los distritos seleccionados",
+        "El sistema excluye los reportes de distritos no seleccionados",
+        "Cada reporte conserva la identificación de su distrito"
+      ]
+    },
+    {
+      "titulo": "Consultar un distrito sin reportes registrados",
+      "tipo": "borde",
+      "dado": [
+        "Que el coordinador ha iniciado sesión",
+        "Que no existen reportes registrados del distrito seleccionado"
+      ],
+      "cuando": "Cuando aplica el filtro por dicho distrito",
+      "entonces": [
+        "El sistema muestra una lista vacía",
+        "El sistema informa que no existen reportes para el distrito seleccionado",
+        "El sistema no muestra reportes de otros distritos"
+      ]
+    },
+    {
+      "titulo": "Consultar todos los reportes sin aplicar filtros",
+      "tipo": "exito",
+      "dado": [
+        "Que el coordinador ha iniciado sesión",
+        "Que existen reportes registrados en diferentes distritos"
+      ],
+      "cuando": "Cuando accede al listado sin seleccionar ningún distrito",
+      "entonces": [
+        "El sistema muestra todos los reportes disponibles",
+        "Los reportes presentan su respectivo distrito"
+      ]
+    },
+    {
+      "titulo": "Limpiar el filtro aplicado",
+      "tipo": "exito",
+      "dado": [
+        "Que el coordinador ha aplicado un filtro por distrito",
+        "Que el sistema muestra resultados filtrados"
+      ],
+      "cuando": "Cuando selecciona la opción de limpiar filtros",
+      "entonces": [
+        "El sistema elimina los criterios de filtrado",
+        "El sistema vuelve a mostrar todos los reportes disponibles"
+      ]
+    },
+    {
+      "titulo": "Seleccionar un distrito no registrado",
+      "tipo": "error",
+      "dado": [
+        "Que el coordinador intenta filtrar los reportes",
+        "Que el distrito ingresado no pertenece a la lista de distritos registrados"
+      ],
+      "cuando": "Cuando intenta aplicar el filtro",
+      "entonces": [
+        "El sistema rechaza el criterio no válido",
+        "El sistema muestra un mensaje indicando que el distrito no es válido",
+        "El sistema no altera los resultados existentes"
+      ]
+    },
+    {
+      "titulo": "Aplicar filtro sin seleccionar un distrito",
+      "tipo": "borde",
+      "dado": [
+        "Que el coordinador se encuentra en el módulo de reportes",
+        "Que no ha seleccionado ningún distrito"
+      ],
+      "cuando": "Cuando presiona el botón de aplicar filtro",
+      "entonces": [
+        "El sistema mantiene la visualización de todos los reportes disponibles",
+        "El sistema no genera errores"
+      ]
+    },
+    {
+      "titulo": "Filtrar reportes recibidos por diferentes canales",
+      "tipo": "exito",
+      "dado": [
+        "Que existen reportes del mismo distrito recibidos mediante web y SMS"
+      ],
+      "cuando": "Cuando el coordinador aplica un filtro por distrito",
+      "entonces": [
+        "El sistema muestra los reportes recibidos por ambos canales",
+        "El sistema identifica correctamente el distrito de cada reporte",
+        "El sistema no excluye reportes por su canal de recepción"
+      ]
+    },
+    {
+      "titulo": "Actualizar resultados ante nuevos reportes",
+      "tipo": "borde",
+      "dado": [
+        "Que el coordinador tiene aplicado un filtro por distrito",
+        "Que se recibe un nuevo reporte del mismo distrito"
+      ],
+      "cuando": "Cuando actualiza la consulta de reportes",
+      "entonces": [
+        "El sistema incorpora el nuevo reporte a los resultados",
+        "El sistema mantiene activo el filtro seleccionado",
+        "El sistema conserva los reportes registrados anteriormente"
+      ]
+    },
+    {
+      "titulo": "Consultar reportes sin autorización",
+      "tipo": "error",
+      "dado": [
+        "Que un usuario no tiene el rol de coordinador de defensa civil"
+      ],
+      "cuando": "Cuando intenta acceder al módulo de filtrado de reportes",
+      "entonces": [
+        "El sistema restringe el acceso al módulo",
+        "El sistema muestra un mensaje de acceso no autorizado",
+        "El sistema no permite consultar los reportes"
+      ]
+    }
+  ]
+}
