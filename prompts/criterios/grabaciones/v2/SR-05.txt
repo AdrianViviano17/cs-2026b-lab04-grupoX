@@ -1,0 +1,162 @@
+{
+  "historia_id": "SR-05",
+  "invest_ok": true,
+  "preguntas": [
+    "¿Cada cuánto tiempo debe actualizarse automáticamente el conteo de reportes verificados?",
+    "¿Se considerarán únicamente los reportes verificados dentro de los últimos 30 minutos?",
+    "¿El tablero público mostrará el conteo total o también el desglose por distrito?",
+    "¿Los reportes duplicados deben excluirse del conteo?"
+  ],
+  "escenarios": [
+    {
+      "titulo": "Visualización del conteo de reportes verificados",
+      "tipo": "exito",
+      "dado": [
+        "Que existen reportes sísmicos verificados en el sistema durante los últimos 30 minutos",
+        "Que el tablero público se encuentra disponible"
+      ],
+      "cuando": "Cuando el operador de emergencias accede al tablero público",
+      "entonces": [
+        "El sistema muestra el número total de reportes verificados durante los últimos 30 minutos",
+        "El conteo incluye únicamente reportes con estado verificado",
+        "El sistema excluye los reportes pendientes y rechazados"
+      ]
+    },
+    {
+      "titulo": "Actualización automática del conteo",
+      "tipo": "exito",
+      "dado": [
+        "Que el tablero público está mostrando el conteo de reportes verificados",
+        "Que se registra un nuevo reporte y posteriormente es verificado"
+      ],
+      "cuando": "Cuando se cumple el intervalo de actualización establecido",
+      "entonces": [
+        "El sistema actualiza automáticamente el conteo",
+        "El nuevo reporte se incorpora si cumple la condición de haber sido verificado dentro de los últimos 30 minutos",
+        "El operador visualiza el conteo actualizado sin recargar manualmente la página"
+      ]
+    },
+    {
+      "titulo": "Exclusión de reportes anteriores a los últimos 30 minutos",
+      "tipo": "exito",
+      "dado": [
+        "Que existen reportes verificados con una antigüedad mayor y menor a 30 minutos"
+      ],
+      "cuando": "Cuando el sistema calcula el conteo del tablero público",
+      "entonces": [
+        "El sistema incluye únicamente los reportes verificados dentro de los últimos 30 minutos",
+        "El sistema excluye los reportes verificados antes de ese periodo",
+        "El conteo refleja correctamente la ventana temporal establecida"
+      ]
+    },
+    {
+      "titulo": "Exclusión de reportes pendientes de verificación",
+      "tipo": "error",
+      "dado": [
+        "Que existen reportes recibidos durante los últimos 30 minutos",
+        "Que algunos reportes todavía tienen estado pendiente de verificación"
+      ],
+      "cuando": "Cuando el sistema actualiza el conteo del tablero",
+      "entonces": [
+        "El sistema no incluye los reportes pendientes",
+        "El sistema contabiliza únicamente los reportes verificados",
+        "El conteo mostrado corresponde al estado real de los reportes"
+      ]
+    },
+    {
+      "titulo": "Visualización cuando no existen reportes verificados",
+      "tipo": "borde",
+      "dado": [
+        "Que no existen reportes verificados durante los últimos 30 minutos"
+      ],
+      "cuando": "Cuando el operador consulta el tablero público",
+      "entonces": [
+        "El sistema muestra un conteo igual a cero",
+        "El sistema no presenta valores nulos o negativos",
+        "El tablero permanece disponible"
+      ]
+    },
+    {
+      "titulo": "Ingreso de múltiples reportes verificados",
+      "tipo": "borde",
+      "dado": [
+        "Que varios reportes son verificados durante los últimos 30 minutos"
+      ],
+      "cuando": "Cuando el sistema actualiza el conteo",
+      "entonces": [
+        "El sistema contabiliza todos los reportes verificados que cumplen el intervalo temporal",
+        "Cada reporte se contabiliza una sola vez",
+        "El conteo coincide con la cantidad real de reportes verificados"
+      ]
+    },
+    {
+      "titulo": "Cambio de estado de pendiente a verificado",
+      "tipo": "exito",
+      "dado": [
+        "Que existe un reporte recibido durante los últimos 30 minutos",
+        "Que inicialmente tiene estado pendiente de verificación"
+      ],
+      "cuando": "Cuando el operador verifica y aprueba el reporte",
+      "entonces": [
+        "El sistema actualiza el estado del reporte a verificado",
+        "El reporte se incorpora al conteo si su fecha de verificación está dentro de los últimos 30 minutos",
+        "El tablero refleja el nuevo conteo en la siguiente actualización"
+      ]
+    },
+    {
+      "titulo": "Reporte que alcanza el límite de los 30 minutos",
+      "tipo": "borde",
+      "dado": [
+        "Que existe un reporte verificado cuya fecha de verificación alcanza exactamente el límite de 30 minutos"
+      ],
+      "cuando": "Cuando el sistema calcula el conteo actualizado",
+      "entonces": [
+        "El sistema aplica consistentemente el límite temporal de 30 minutos",
+        "El sistema incluye o excluye el reporte según la regla de límite definida",
+        "El conteo no presenta inconsistencias temporales"
+      ]
+    },
+    {
+      "titulo": "Falla al recuperar los datos de reportes",
+      "tipo": "error",
+      "dado": [
+        "Que el tablero público está disponible",
+        "Que ocurre un error al consultar la base de datos de reportes"
+      ],
+      "cuando": "Cuando el sistema intenta actualizar el conteo",
+      "entonces": [
+        "El sistema informa que no fue posible actualizar los datos",
+        "El sistema no muestra un conteo incorrecto como si fuera actual",
+        "El tablero mantiene visible la última información válida, identificándola como desactualizada"
+      ]
+    },
+    {
+      "titulo": "Actualización ante reportes que salen de la ventana temporal",
+      "tipo": "borde",
+      "dado": [
+        "Que el tablero muestra reportes verificados dentro de los últimos 30 minutos",
+        "Que transcurre el tiempo y algunos reportes superan los 30 minutos de antigüedad"
+      ],
+      "cuando": "Cuando el sistema realiza una nueva actualización del conteo",
+      "entonces": [
+        "El sistema excluye los reportes que ya superaron los 30 minutos",
+        "El conteo disminuye según corresponda",
+        "El sistema mantiene únicamente los reportes que cumplen el intervalo temporal"
+      ]
+    },
+    {
+      "titulo": "Acceso público al tablero de reportes",
+      "tipo": "exito",
+      "dado": [
+        "Que el tablero público está habilitado",
+        "Que existe información de reportes verificados"
+      ],
+      "cuando": "Cuando un ciudadano u operador accede al tablero",
+      "entonces": [
+        "El sistema permite visualizar el conteo actualizado",
+        "El sistema no exige iniciar sesión para consultar la información pública",
+        "El sistema no expone datos personales de los ciudadanos que realizaron los reportes"
+      ]
+    }
+  ]
+}
