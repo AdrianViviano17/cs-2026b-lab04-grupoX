@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-06",
+  "prioridad": "ALTA",
+  "requiere_rescate": true,
+  "justificacion": "Una persona en silla de ruedas se encuentra atrapada debido a que la puerta principal está bloqueada y no puede utilizar las escaleras para evacuar. Requiere asistencia prioritaria para una evacuación segura.",
+  "posible_inyeccion": false
+}
