@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-04",
+  "prioridad": "BAJA",
+  "requiere_rescate": false,
+  "justificacion": "Se reporta un movimiento sísmico suave sin daños materiales ni personas afectadas. No requiere intervención de emergencia.",
+  "posible_inyeccion": false
+}
