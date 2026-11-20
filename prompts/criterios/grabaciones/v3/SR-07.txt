@@ -1,0 +1,10 @@
+{
+  "historia_id": "SR-07",
+  "invest_ok": false,
+  "preguntas": [
+    "¿Qué necesidad del usuario o del negocio busca resolver esta implementación?",
+    "¿Qué funcionalidad observable debe ofrecer el sistema una vez implementados estos componentes?",
+    "¿Qué resultado esperado permitirá comprobar que la historia fue completada correctamente?"
+  ],
+  "escenarios": []
+}
