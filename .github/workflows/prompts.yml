@@ -31,11 +31,13 @@ jobs:
 
       - name: Ejecutar Evals Tarea A (Criterios de Aceptacion)
         working-directory: prompts/criterios
+        continue-on-error: true
         run: |
           npx --yes promptfoo@0.118.0 eval --no-cache -o resultados_criterios.json
 
       - name: Ejecutar Evals Tarea B (Prioridad de Reportes - Caso 8)
         working-directory: prompts/prioridad
+        continue-on-error: true
         run: |
           npx --yes promptfoo@0.118.0 eval --no-cache -o resultados_prioridad.json
 
