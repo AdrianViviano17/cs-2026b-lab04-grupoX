@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-01",
+  "prioridad": "CRITICA",
+  "requiere_rescate": true,
+  "justificacion": "Colapso de techos de adobe en dos viviendas con personas atrapadas que solicitan auxilio.",
+  "posible_inyeccion": false
+}
