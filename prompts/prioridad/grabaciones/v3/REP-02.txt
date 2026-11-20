@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-02",
+  "prioridad": "ALTA",
+  "requiere_rescate": false,
+  "justificacion": "Cables electricos caidos con chispas frente a un colegio representan un riesgo electrico grave.",
+  "posible_inyeccion": false
+}
