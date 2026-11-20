@@ -1,0 +1,171 @@
+{\
+&#x20; "historia_id": "SR-02",\
+&#x20; "invest_ok": true,\
+&#x20; "preguntas": [\
+&#x20;   "¿Cuál es el número telefónico habilitado para recibir los reportes SMS?",\
+&#x20;   "¿Qué formato específico debe tener el mensaje SMS?",\
+&#x20;   "¿Se requiere que el número del remitente esté previamente registrado?",\
+&#x20;   "¿El sistema enviará una confirmación automática de recepción?",\
+&#x20;   "¿Qué límite de caracteres tendrá el mensaje SMS?"\
+&#x20; ],\
+&#x20; "escenarios": [\
+&#x20;   {\
+&#x20;     "titulo": "Envío exitoso de reporte mediante SMS",\
+&#x20;     "tipo": "exito",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano no tiene acceso a internet móvil",\
+&#x20;       "Que dispone de señal de telefonía móvil para enviar SMS",\
+&#x20;       "Que el mensaje contiene un distrito válido y una intensidad sísmica permitida"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando envía el mensaje SMS al número habilitado por SismoReporta AQP",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema recibe el mensaje SMS",\
+&#x20;       "El sistema identifica el distrito y la intensidad reportada",\
+&#x20;       "El sistema registra correctamente el reporte",\
+&#x20;       "El reporte queda disponible para las brigadas locales",\
+&#x20;       "El ciudadano recibe una confirmación de recepción"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Recepción de SMS sin conexión a internet móvil",\
+&#x20;     "tipo": "exito",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano se encuentra sin conexión a internet móvil",\
+&#x20;       "Que la red de telefonía permite el envío de mensajes SMS",\
+&#x20;       "Que el sistema de recepción SMS está operativo"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando envía un reporte mediante SMS",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema procesa el mensaje sin requerir conexión a internet del ciudadano",\
+&#x20;       "El sistema registra el reporte recibido",\
+&#x20;       "El sistema confirma la recepción mediante SMS"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Envío de SMS con formato incorrecto",\
+&#x20;     "tipo": "error",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano intenta enviar un reporte mediante SMS",\
+&#x20;       "Que el mensaje no cumple con el formato establecido"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema recibe el mensaje",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema identifica el formato incorrecto",\
+&#x20;       "El sistema no registra el reporte",\
+&#x20;       "El sistema envía una respuesta indicando el formato correcto"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Envío de SMS sin indicar distrito",\
+&#x20;     "tipo": "error",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano envía un SMS con la intensidad sísmica",\
+&#x20;       "Que el mensaje no contiene el distrito donde percibió el sismo"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema procesa el mensaje",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema identifica que falta el distrito",\
+&#x20;       "El sistema no registra el reporte incompleto",\
+&#x20;       "El sistema solicita al ciudadano completar el dato faltante"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Envío de SMS sin indicar intensidad",\
+&#x20;     "tipo": "error",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano envía un SMS indicando su distrito",\
+&#x20;       "Que el mensaje no contiene la intensidad percibida"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema procesa el mensaje",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema identifica que falta la intensidad",\
+&#x20;       "El sistema no registra el reporte incompleto",\
+&#x20;       "El sistema solicita al ciudadano indicar la intensidad"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Envío de SMS con distrito no válido",\
+&#x20;     "tipo": "error",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano envía un SMS con un distrito que no pertenece a Arequipa o no está registrado"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema valida el mensaje",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema rechaza el distrito ingresado",\
+&#x20;       "El sistema no registra el reporte",\
+&#x20;       "El sistema informa que el distrito no es válido"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Envío de SMS con intensidad fuera del rango permitido",\
+&#x20;     "tipo": "error",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano envía un SMS con un distrito válido",\
+&#x20;       "Que indica una intensidad fuera de la escala establecida"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema procesa el mensaje",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema identifica la intensidad no válida",\
+&#x20;       "El sistema rechaza el reporte",\
+&#x20;       "El sistema informa al ciudadano sobre la escala permitida"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Recepción de mensaje SMS duplicado",\
+&#x20;     "tipo": "borde",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano ya envió un reporte mediante SMS",\
+&#x20;       "Que el mismo mensaje es recibido nuevamente por el sistema"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema procesa el mensaje duplicado",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema identifica el mensaje duplicado cuando sea posible",\
+&#x20;       "El sistema evita generar registros duplicados del mismo mensaje",\
+&#x20;       "El sistema informa al ciudadano sobre el estado de su reporte"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Mensaje SMS que supera el límite de caracteres",\
+&#x20;     "tipo": "borde",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano redacta un reporte mediante SMS",\
+&#x20;       "Que el mensaje supera el límite de caracteres establecido"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema recibe el mensaje",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema valida la longitud del mensaje",\
+&#x20;       "El sistema informa si el mensaje no puede procesarse",\
+&#x20;       "El sistema solicita enviar nuevamente el reporte con el formato permitido"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Pérdida de señal de telefonía durante el envío",\
+&#x20;     "tipo": "error",\
+&#x20;     "dado": [\
+&#x20;       "Que el ciudadano no tiene acceso a internet móvil",\
+&#x20;       "Que pierde la señal de telefonía antes de completar el envío del SMS"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando intenta enviar el reporte",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema no registra un mensaje que no ha recibido",\
+&#x20;       "El ciudadano no recibe una confirmación de recepción inexistente",\
+&#x20;       "El ciudadano puede reenviar el mensaje cuando recupere la señal"\
+&#x20;     ]\
+&#x20;   },\
+&#x20;   {\
+&#x20;     "titulo": "Recepción simultánea de reportes SMS",\
+&#x20;     "tipo": "borde",\
+&#x20;     "dado": [\
+&#x20;       "Que varios ciudadanos envían reportes SMS durante un mismo sismo",\
+&#x20;       "Que el sistema de recepción SMS se encuentra operativo"\
+&#x20;     ],\
+&#x20;     "cuando": "Cuando el sistema recibe múltiples mensajes simultáneamente",\
+&#x20;     "entonces": [\
+&#x20;       "El sistema procesa los mensajes recibidos",\
+&#x20;       "El sistema registra cada reporte de manera independiente",\
+&#x20;       "El sistema evita perder información de los reportes recibidos",\
+&#x20;       "Cada ciudadano recibe la confirmación correspondiente"\
+&#x20;     ]\
+&#x20;   }\
+&#x20; ]\
+}
