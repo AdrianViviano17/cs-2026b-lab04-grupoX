@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-04",
+  "prioridad": "BAJA",
+  "requiere_rescate": false,
+  "justificacion": "Movimiento sismico percibido con lamparas oscilando, sin danos materiales ni personas heridas.",
+  "posible_inyeccion": false
+}
