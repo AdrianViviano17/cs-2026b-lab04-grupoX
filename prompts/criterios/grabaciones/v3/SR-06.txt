@@ -1,0 +1,10 @@
+{
+  "historia_id": "SR-06",
+  "invest_ok": false,
+  "preguntas": [
+    "¿Qué tiempo máximo de respuesta debe cumplir la aplicación para considerarse rápida?",
+    "¿Cuántos usuarios o reportes simultáneos debe soportar la aplicación durante una emergencia?",
+    "¿Qué condiciones específicas debe mantener la aplicación durante y después de un terremoto para considerarse resistente?"
+  ],
+  "escenarios": []
+}
