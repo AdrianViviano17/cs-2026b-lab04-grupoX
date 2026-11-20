@@ -1,0 +1,21 @@
+### **Criterios de aceptación – Historia de usuario: Enviar reporte mediante SMS**
+
+**HU:** Como ciudadano sin acceso a internet móvil tras un sismo, quiero enviar mi reporte mediante mensaje de texto (SMS) para que mi alerta llegue aunque caigan los datos.
+
+1\. **Recepción de SMS:** El sistema debe permitir recibir reportes enviados mediante mensajes de texto (SMS), sin necesidad de conexión a internet.
+
+2\. **Formato del mensaje:** El sistema debe aceptar mensajes con un formato predefinido que incluya el distrito y la intensidad percibida del sismo.
+
+3\. **Validación del mensaje:** El sistema debe verificar que el SMS contenga los datos obligatorios y que estos sean válidos.
+
+4\. **Registro del reporte:** El sistema debe almacenar correctamente los reportes recibidos mediante SMS en la base de datos.
+
+5\. **Identificación del remitente:** El sistema debe registrar el número telefónico desde el cual se envió el mensaje.
+
+6\. **Notificación a brigadas:** El sistema debe enviar la alerta a las brigadas locales correspondientes según el distrito indicado.
+
+7\. **Confirmación de recepción:** El sistema debe enviar un SMS de respuesta confirmando que el reporte fue recibido y registrado correctamente.
+
+8\. **Manejo de errores:** Si el mensaje tiene un formato incorrecto o datos incompletos, el sistema debe responder mediante SMS indicando cómo corregirlo.
+
+9\. **Registro de fecha y hora:** El sistema debe guardar automáticamente la fecha y hora de recepción del mensaje.
