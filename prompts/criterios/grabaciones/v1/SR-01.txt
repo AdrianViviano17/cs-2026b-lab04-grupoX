@@ -1,0 +1,19 @@
+### **Criterios de aceptación – Historia de usuario: Enviar reporte de sismo**
+
+**HU:** Como ciudadano en Arequipa, quiero enviar un reporte de sismo indicando mi distrito y la intensidad percibida para alertar a las brigadas locales.
+
+1\. **Selección del distrito:** El sistema debe permitir al ciudadano seleccionar su distrito de residencia o ubicación dentro de Arequipa.
+
+2\. **Selección de intensidad:** El sistema debe permitir indicar la intensidad percibida del sismo mediante opciones predefinidas (leve, moderada y fuerte).
+
+3\. **Validación de datos:** El sistema debe verificar que los campos obligatorios estén completos antes de enviar el reporte.
+
+4\. **Envío del reporte:** El sistema debe permitir enviar el reporte y almacenarlo correctamente en la base de datos.
+
+5\. **Confirmación:** El sistema debe mostrar un mensaje confirmando que el reporte fue enviado exitosamente.
+
+6\. **Notificación a brigadas:** El sistema debe notificar a las brigadas locales correspondientes al distrito reportado.
+
+7\. **Control de errores:** Si ocurre un problema durante el envío, el sistema debe mostrar un mensaje de error e indicar que el reporte no pudo ser registrado.
+
+8\. **Registro de fecha y hora:** El sistema debe guardar automáticamente la fecha y hora en que se realizó el reporte.
