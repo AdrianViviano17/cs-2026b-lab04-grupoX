@@ -1,0 +1,153 @@
+{
+  "historia_id": "SR-08",
+  "invest_ok": true,
+  "preguntas": [
+    "¿El brigadista debe agregar una observación al marcar un reporte como atendido?",
+    "¿Se debe registrar automáticamente la fecha y hora de atención?",
+    "¿El reporte atendido podrá volver a cambiarse a pendiente?",
+    "¿Los demás brigadistas podrán visualizar quién atendió el reporte?"
+  ],
+  "escenarios": [
+    {
+      "titulo": "Marcar un reporte como atendido",
+      "tipo": "exito",
+      "dado": [
+        "Que el brigadista ha iniciado sesión correctamente",
+        "Que existe un reporte sísmico pendiente de atención",
+        "Que el brigadista tiene permisos para actualizar el reporte"
+      ],
+      "cuando": "Cuando selecciona la opción marcar como atendido",
+      "entonces": [
+        "El sistema actualiza el estado del reporte a atendido",
+        "El sistema registra la fecha y hora de atención",
+        "El sistema confirma que el reporte fue marcado como atendido"
+      ]
+    },
+    {
+      "titulo": "Evitar la atención duplicada de un reporte",
+      "tipo": "exito",
+      "dado": [
+        "Que un reporte ya se encuentra marcado como atendido",
+        "Que otro brigadista consulta el mismo reporte"
+      ],
+      "cuando": "Cuando intenta marcar nuevamente el reporte como atendido",
+      "entonces": [
+        "El sistema identifica que el reporte ya fue atendido",
+        "El sistema evita registrar una segunda atención",
+        "El sistema muestra el estado actual del reporte",
+        "El sistema informa que el reporte ya fue atendido"
+      ]
+    },
+    {
+      "titulo": "Consultar reportes atendidos",
+      "tipo": "exito",
+      "dado": [
+        "Que existen reportes con estado atendido",
+        "Que el brigadista ha iniciado sesión"
+      ],
+      "cuando": "Cuando consulta el listado de reportes",
+      "entonces": [
+        "El sistema muestra los reportes atendidos",
+        "Cada reporte presenta claramente su estado",
+        "El sistema permite identificar los reportes que ya no requieren otra visita"
+      ]
+    },
+    {
+      "titulo": "Intentar atender un reporte inexistente",
+      "tipo": "error",
+      "dado": [
+        "Que el brigadista ha iniciado sesión",
+        "Que el identificador del reporte no existe en el sistema"
+      ],
+      "cuando": "Cuando intenta marcar el reporte como atendido",
+      "entonces": [
+        "El sistema rechaza la operación",
+        "El sistema muestra un mensaje indicando que el reporte no existe",
+        "El sistema no modifica ningún registro"
+      ]
+    },
+    {
+      "titulo": "Intentar atender un reporte sin autorización",
+      "tipo": "error",
+      "dado": [
+        "Que un usuario no tiene el rol de brigadista",
+        "Que intenta modificar el estado de un reporte"
+      ],
+      "cuando": "Cuando solicita marcar el reporte como atendido",
+      "entonces": [
+        "El sistema rechaza la operación",
+        "El sistema muestra un mensaje de acceso no autorizado",
+        "El estado del reporte permanece sin modificaciones"
+      ]
+    },
+    {
+      "titulo": "Marcar como atendido un reporte pendiente",
+      "tipo": "exito",
+      "dado": [
+        "Que el reporte tiene estado pendiente",
+        "Que el brigadista está autorizado para atenderlo"
+      ],
+      "cuando": "Cuando confirma la atención del reporte",
+      "entonces": [
+        "El sistema cambia el estado de pendiente a atendido",
+        "El sistema conserva la información original del reporte",
+        "El sistema registra la identificación del brigadista responsable"
+      ]
+    },
+    {
+      "titulo": "Intentar atender un reporte simultáneamente",
+      "tipo": "borde",
+      "dado": [
+        "Que dos brigadistas consultan el mismo reporte pendiente",
+        "Que ambos intentan marcarlo como atendido simultáneamente"
+      ],
+      "cuando": "Cuando ambos confirman la operación",
+      "entonces": [
+        "El sistema permite que únicamente una operación registre la atención efectiva",
+        "El sistema evita registrar dos atenciones para el mismo reporte",
+        "El sistema informa al segundo brigadista que el reporte ya fue atendido"
+      ]
+    },
+    {
+      "titulo": "Fallo durante la actualización del estado",
+      "tipo": "error",
+      "dado": [
+        "Que el brigadista intenta marcar un reporte como atendido",
+        "Que ocurre un error en la base de datos durante la actualización"
+      ],
+      "cuando": "Cuando el sistema procesa la solicitud",
+      "entonces": [
+        "El sistema informa que no fue posible actualizar el reporte",
+        "El sistema conserva el estado anterior del reporte",
+        "El sistema evita mostrar una confirmación de atención exitosa"
+      ]
+    },
+    {
+      "titulo": "Consultar los datos de atención",
+      "tipo": "exito",
+      "dado": [
+        "Que un reporte fue marcado como atendido correctamente"
+      ],
+      "cuando": "Cuando un brigadista autorizado consulta los detalles del reporte",
+      "entonces": [
+        "El sistema muestra el estado atendido",
+        "El sistema muestra la fecha y hora de atención",
+        "El sistema identifica al brigadista responsable"
+      ]
+    },
+    {
+      "titulo": "Intentar marcar nuevamente un reporte ya atendido después de actualizar la página",
+      "tipo": "borde",
+      "dado": [
+        "Que un reporte fue marcado como atendido correctamente",
+        "Que el brigadista actualiza la página o vuelve a ingresar al sistema"
+      ],
+      "cuando": "Cuando consulta nuevamente el reporte",
+      "entonces": [
+        "El sistema mantiene el estado atendido",
+        "El sistema conserva los datos de la atención registrada",
+        "El sistema no permite generar una nueva atención para el mismo reporte"
+      ]
+    }
+  ]
+}
