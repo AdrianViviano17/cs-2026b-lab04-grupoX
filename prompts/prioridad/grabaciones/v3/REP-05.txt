@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-05",
+  "prioridad": "DESCARTADO",
+  "requiere_rescate": false,
+  "justificacion": "Mensaje de prueba sin informacion relacionada con danos, victimas o efectos de un sismo.",
+  "posible_inyeccion": false
+}
