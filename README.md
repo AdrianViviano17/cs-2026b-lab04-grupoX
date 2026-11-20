@@ -133,19 +133,25 @@ C4Context
 - **Evaluación ATAM-Lite (E3/E7):** [`docs/architecture/atam-lite.md`](docs/architecture/atam-lite.md)
 - **Fitness Functions (E5):** [`.github/workflows/fitness.yml`](.github/workflows/fitness.yml)
 
-## Laboratorio 09: Ingeniería de Prompts y Evals Automatizados (SismoReporta AQP)
+# SismoReporta AQP - Laboratorio 09: Ingeniería de Prompts y Evals Automatizados
 
-### 1. Evolución de Tasa de Aprobación (`promptfoo eval`)
+Plataforma ciudadana para el reporte y triage de emergencias sísmicas en Arequipa (Caso 8). Este módulo implementa prompts versionados, evaluación automatizada con `promptfoo`, validación de contratos con JSON Schema, defensa contra inyección de prompts (OWASP LLM01) e integración continua en GitHub Actions.
+
+## 1. Evolución de Tasa de Aprobación (`promptfoo eval`)
 
 | Tarea | Versión 1 (`v1` Base) | Versión 2 (`v2` Rol + JSON) | Versión 3 (`v3` Blindado + Few-Shot) |
 | :--- | :---: | :---: | :---: |
 | **Tarea A: Criterios de Aceptación** | **0.0%** (0/8) | **37.5%** (3/8) | **100.0%** (8/8) |
-| **Tarea B: Prioridad de Reportes (Caso 8)** | **0.0%** (0/8) | *(Completar con log B)* | **100.0%** (8/8) |
+| **Tarea B: Prioridad de Reportes (Caso 8)** | **0.0%** (0/8) | **50.0%** (4/8) | **100.0%** (8/8) |
 
-### 2. Hallazgos Clave por Iteración
-* **`v1` $\rightarrow$ `v2` (+37.5% en Tarea A):** Incorporar rol de QA, contexto de SismoReporta AQP y esquema JSON estricto resolvió el parseo estructural, pero el modelo aún filtraba términos de implementación (`base de datos`, `endpoint`) y aceptaba historias técnicas/ambiguas (`SR-06`, `SR-07`).
-* **`v2` $\rightarrow$ `v3` (+62.5% en Tarea A):** Agregar evaluación previa de criterios **INVEST** (*Cognitive Verifier*), restricciones negativas explícitas, ejemplos *few-shot* y delimitadores XML (`<historia>`, `<reporte>`) elevó la aprobación al **100%**, bloqueando además ataques de inyección de prompts (`SR-08`, `REP-07`, `REP-08`).
-- **ADRs de Iteraciones (E6):** [`ADR-006`](docs/architecture/adr/006-postgis-gist-index.md), [`ADR-007`](docs/architecture/adr/007-redis-cache-ia.md), [`ADR-008`](docs/architecture/adr/008-outbox-pattern.md)
+### Decisiones de Diseño por Iteración
+* **`v1` $\rightarrow$ `v2`:** Incorporar el rol de QA / Operador COER, contexto de SismoReporta AQP y esquema JSON estricto resolvió el parseo estructural, pero el modelo aún filtraba términos técnicos en criterios (`base de datos`, `endpoint`), aceptaba historias ambiguas (`SR-06`, `SR-07`) y era vulnerable a inyecciones de prioridad (`REP-07`).
+* **`v2` $\rightarrow$ `v3`:** Agregar evaluación previa de criterios **INVEST** (*Cognitive Verifier*), restricciones negativas explícitas, ejemplos *few-shot* y delimitadores XML (`<historia>`, `<reporte>`) elevó la aprobación al **100%**, neutralizando ataques de inyección directa e indirecta (`SR-08`, `REP-07`, `REP-08`).
 
-
-
+## 2. Estructura del Módulo de Prompts
+* `prompts/criterios/`: Plantillas `v1.txt`–`v3.txt`, `esquema.json`, casos `historias.yaml`, grabaciones y `promptfooconfig.yaml`.
+* `prompts/prioridad/`: Plantillas `v1.txt`–`v3.txt`, `esquema.json`, casos `reportes.yaml`, grabaciones y `promptfooconfig.yaml`.
+* `src/reportes/generador_criterios.py`: Adaptadores `GeneradorCriterios` y `ClasificadorPrioridadLLM` con validación `jsonschema`.
+* `tests/test_prompts_integracion.py`: Pruebas automatizadas con fixtures grabados.
+* `seguridad/red-team.md`: Matriz de ataques OWASP LLM01 y defensa en 4 capas.
+* `bitacora-ia.md`: Registro de iteraciones y experimento de no-determinismo.
