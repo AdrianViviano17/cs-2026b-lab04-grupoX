@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-06",
+  "prioridad": "CRITICA",
+  "requiere_rescate": true,
+  "justificacion": "Persona vulnerable en silla de ruedas atrapada sin posibilidad de evacuar debido a una puerta bloqueada.",
+  "posible_inyeccion": false
+}
