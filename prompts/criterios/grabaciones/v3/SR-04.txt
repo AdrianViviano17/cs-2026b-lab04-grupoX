@@ -1,0 +1,44 @@
+{
+  "historia_id": "SR-04",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Confirmación exitosa del reporte",
+      "tipo": "exito",
+      "dado": [
+        "El ciudadano completa y envía un reporte sísmico"
+      ],
+      "cuando": "El sistema registra correctamente el reporte",
+      "entonces": [
+        "El ciudadano recibe una confirmación inmediata",
+        "La confirmación incluye un código de seguimiento único"
+      ]
+    },
+    {
+      "titulo": "Seguimiento mediante el código recibido",
+      "tipo": "exito",
+      "dado": [
+        "El ciudadano ha recibido la confirmación de su reporte",
+        "La confirmación contiene el código de seguimiento"
+      ],
+      "cuando": "Consulta la confirmación de su registro",
+      "entonces": [
+        "El ciudadano puede identificar su reporte mediante el código recibido"
+      ]
+    },
+    {
+      "titulo": "Fallo al registrar el reporte",
+      "tipo": "error",
+      "dado": [
+        "El ciudadano completa los datos de su reporte sísmico",
+        "El sistema no logra registrar el reporte"
+      ],
+      "cuando": "El ciudadano intenta enviarlo",
+      "entonces": [
+        "El sistema no muestra una confirmación de registro exitoso",
+        "El sistema no proporciona un código de seguimiento para un reporte no registrado"
+      ]
+    }
+  ]
+}
