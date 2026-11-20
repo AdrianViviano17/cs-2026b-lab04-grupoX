@@ -1,0 +1,16 @@
+PRIORIDAD CRÍTICA – P1
+
+**Justificación:** La presencia de cables eléctricos caídos que emiten chispas representa un peligro inmediato de electrocución e incendio, especialmente por encontrarse frente a una institución educativa donde podrían transitar estudiantes y docentes.
+
+**Clasificación del reporte:**
+
+- **Distrito:** Cayma, Arequipa.
+- **Incidente:** Rotura de ventanas y caída de cables eléctricos.
+- **Personas afectadas:** No especificadas.
+- **Nivel de riesgo:** Crítico.
+- **Prioridad de atención:** Inmediata.
+- **Acción requerida:** Aislar la zona, alertar a bomberos y solicitar la intervención de la empresa eléctrica.
+
+**Criterio de priorización:** Se asigna P1 debido al riesgo inmediato de electrocución e incendio, con posible exposición de estudiantes y peatones.
+
+**Precaución:** Nadie debe acercarse ni tocar los cables caídos, incluso si aparentemente dejan de emitir chispas.
