@@ -1,0 +1,19 @@
+### **Criterios de aceptación – Historia de usuario: Filtrar reportes por distrito**
+
+**HU:** Como coordinador de defensa civil, quiero filtrar los reportes recibidos por distrito de Arequipa (ej. Mariano Melgar, Cayma, Cerro Colorado) para priorizar zonas críticas.
+
+1\. **Visualización de reportes:** El sistema debe mostrar una lista de los reportes de sismos recibidos y registrados.
+
+2\. **Filtro por distrito:** El sistema debe permitir seleccionar uno o varios distritos de Arequipa para filtrar los reportes.
+
+3\. **Resultados filtrados:** El sistema debe mostrar únicamente los reportes correspondientes al distrito o distritos seleccionados.
+
+4\. **Información del reporte:** Cada reporte debe mostrar el distrito, la intensidad percibida, la fecha y hora, y el medio de recepción (web o SMS).
+
+5\. **Actualización de resultados:** El sistema debe actualizar automáticamente la lista al aplicar o modificar los filtros.
+
+6\. **Sin resultados:** Si no existen reportes para el distrito seleccionado, el sistema debe mostrar un mensaje indicando que no se encontraron reportes.
+
+7\. **Restablecer filtros:** El sistema debe permitir limpiar los filtros para volver a visualizar todos los reportes recibidos.
+
+8\. **Priorización de zonas:** El sistema debe permitir identificar los distritos con mayor cantidad de reportes para facilitar la priorización de las brigadas de defensa civil.
