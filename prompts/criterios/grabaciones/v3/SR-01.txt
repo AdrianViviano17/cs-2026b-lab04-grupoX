@@ -1,0 +1,60 @@
+{
+  "historia_id": "SR-01",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Envío exitoso de un reporte sísmico",
+      "tipo": "exito",
+      "dado": [
+        "El ciudadano se encuentra en Arequipa",
+        "El ciudadano selecciona el distrito de Cayma",
+        "El ciudadano indica una intensidad percibida"
+      ],
+      "cuando": "Envía el reporte de sismo",
+      "entonces": [
+        "El sistema confirma que el reporte fue enviado correctamente",
+        "El reporte queda disponible para las brigadas locales"
+      ]
+    },
+    {
+      "titulo": "Reporte desde otro distrito",
+      "tipo": "exito",
+      "dado": [
+        "El ciudadano selecciona el distrito de Cerro Colorado",
+        "El ciudadano indica una intensidad percibida"
+      ],
+      "cuando": "Envía el reporte de sismo",
+      "entonces": [
+        "El sistema registra el distrito e intensidad indicados",
+        "El sistema confirma el envío del reporte"
+      ]
+    },
+    {
+      "titulo": "Envío sin seleccionar distrito",
+      "tipo": "error",
+      "dado": [
+        "El ciudadano no ha seleccionado ningún distrito",
+        "El ciudadano sí ha indicado la intensidad percibida"
+      ],
+      "cuando": "Intenta enviar el reporte",
+      "entonces": [
+        "El sistema no permite completar el envío",
+        "El sistema solicita seleccionar un distrito"
+      ]
+    },
+    {
+      "titulo": "Envío sin indicar intensidad",
+      "tipo": "error",
+      "dado": [
+        "El ciudadano ha seleccionado el distrito de Yanahuara",
+        "El ciudadano no ha indicado la intensidad percibida"
+      ],
+      "cuando": "Intenta enviar el reporte",
+      "entonces": [
+        "El sistema no permite completar el envío",
+        "El sistema solicita indicar la intensidad percibida"
+      ]
+    }
+  ]
+}
