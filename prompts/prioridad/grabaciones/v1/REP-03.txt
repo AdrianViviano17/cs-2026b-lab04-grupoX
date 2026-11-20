@@ -1,0 +1,14 @@
+PRIORIDAD MEDIA – P2
+
+**Justificación:** El reporte indica daños materiales menores, como caída de objetos y rajaduras leves en una pared. No se reportan personas heridas ni atrapadas, por lo que no existe una emergencia vital confirmada.
+
+**Clasificación del reporte:**
+
+- **Distrito:** Yanahuara, Arequipa.
+- **Incidente:** Movimiento sísmico con daños materiales leves.
+- **Personas afectadas:** Ninguna reportada.
+- **Nivel de riesgo:** Moderado.
+- **Prioridad de atención:** Media.
+- **Acción requerida:** Inspeccionar las rajaduras de la pared y verificar que no existan daños estructurales.
+
+**Criterio de priorización:** Se asigna P2 porque existen daños materiales que requieren evaluación, pero no se reportan víctimas ni situaciones de peligro inmediato.
