@@ -1,0 +1,55 @@
+{
+  "historia_id": "SR-05",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Visualización del conteo de reportes verificados",
+      "tipo": "exito",
+      "dado": [
+        "Existen 12 reportes verificados durante los últimos 30 minutos"
+      ],
+      "cuando": "El operador de emergencias consulta el tablero público",
+      "entonces": [
+        "El tablero muestra el conteo de 12 reportes verificados",
+        "El conteo corresponde únicamente a los últimos 30 minutos"
+      ]
+    },
+    {
+      "titulo": "Actualización del conteo ante nuevos reportes",
+      "tipo": "exito",
+      "dado": [
+        "El tablero muestra 12 reportes verificados en los últimos 30 minutos",
+        "Se verifica un nuevo reporte dentro de ese periodo"
+      ],
+      "cuando": "El tablero actualiza la información",
+      "entonces": [
+        "El conteo mostrado aumenta a 13 reportes verificados"
+      ]
+    },
+    {
+      "titulo": "Reporte fuera del periodo de 30 minutos",
+      "tipo": "borde",
+      "dado": [
+        "Existen 12 reportes verificados en los últimos 30 minutos",
+        "Se recibe un reporte verificado cuyo registro ocurrió hace 35 minutos"
+      ],
+      "cuando": "El operador consulta el tablero público",
+      "entonces": [
+        "El tablero mantiene el conteo de 12 reportes",
+        "El reporte de hace 35 minutos no se incluye en el conteo"
+      ]
+    },
+    {
+      "titulo": "Ausencia de reportes verificados recientes",
+      "tipo": "borde",
+      "dado": [
+        "No existen reportes verificados durante los últimos 30 minutos"
+      ],
+      "cuando": "El operador consulta el tablero público",
+      "entonces": [
+        "El tablero muestra un conteo de 0 reportes verificados"
+      ]
+    }
+  ]
+}
