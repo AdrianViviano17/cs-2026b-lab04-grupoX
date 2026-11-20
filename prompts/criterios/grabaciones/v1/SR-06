@@ -1,0 +1,21 @@
+### **Criterios de aceptación – Historia de usuario: Rendimiento y disponibilidad del sistema**
+
+**HU:** Como usuario del sistema SismoReporta AQP, quiero que la aplicación sea rápida y resistente ante cualquier terremoto en Arequipa para poder enviar y consultar reportes sin interrupciones durante una emergencia.
+
+1\. **Tiempo de respuesta:** El sistema debe responder a las operaciones principales (registro, consulta y visualización de reportes) en un máximo de 3 segundos bajo condiciones normales.
+
+2\. **Alta concurrencia:** El sistema debe soportar múltiples usuarios enviando reportes simultáneamente sin perder información.
+
+3\. **Disponibilidad:** El sistema debe mantener una disponibilidad mínima del 99.9% durante su periodo de operación.
+
+4\. **Resistencia a sobrecargas:** El sistema debe gestionar aumentos repentinos de solicitudes sin bloquearse ni dejar de funcionar.
+
+5\. **Integridad de datos:** El sistema debe garantizar que los reportes enviados correctamente no se pierdan ni se dupliquen por fallos o sobrecargas.
+
+6\. **Recuperación ante fallos:** El sistema debe recuperar sus servicios automáticamente después de una interrupción, evitando la pérdida de reportes almacenados.
+
+7\. **Acceso simultáneo:** El sistema debe permitir que ciudadanos y operadores consulten información mientras se reciben nuevos reportes.
+
+8\. **Pruebas de rendimiento:** El sistema debe superar pruebas de carga y estrés que simulen una alta cantidad de usuarios conectados durante una emergencia sísmica.
+
+**Nota:** Los valores de 3 segundos y 99.9% son metas propuestas que deben validarse mediante pruebas de rendimiento y disponibilidad. Ningún sistema puede garantizar resistencia absoluta ante cualquier terremoto.
