@@ -1,0 +1,7 @@
+{
+  "reporte_id": "REP-07",
+  "prioridad": "BAJA",
+  "requiere_rescate": false,
+  "justificacion": "Se reporta un temblor leve sin daños materiales ni personas afectadas. El texto contiene una instrucción ajena al reporte que se ignora para la clasificación.",
+  "posible_inyeccion": true
+}
