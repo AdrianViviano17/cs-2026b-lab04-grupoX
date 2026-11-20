@@ -1,0 +1,173 @@
+{
+  "historia_id": "SR-04",
+  "invest_ok": true,
+  "preguntas": [
+    "¿La confirmación se enviará mediante SMS, correo electrónico o se mostrará directamente en la plataforma web?",
+    "¿El código de seguimiento será único para cada reporte?",
+    "¿El código permitirá consultar posteriormente el estado del reporte?",
+    "¿Qué tiempo máximo se considera inmediato para recibir la confirmación?"
+  ],
+  "escenarios": [
+    {
+      "titulo": "Confirmación exitosa después de registrar un reporte",
+      "tipo": "exito",
+      "dado": [
+        "Que el ciudadano ha completado correctamente los datos del reporte sísmico",
+        "Que el sistema se encuentra operativo"
+      ],
+      "cuando": "Cuando el ciudadano envía el reporte",
+      "entonces": [
+        "El sistema registra correctamente el reporte",
+        "El sistema genera un código de seguimiento único",
+        "El sistema muestra una confirmación de registro exitoso",
+        "El sistema presenta el código de seguimiento al ciudadano inmediatamente después del registro"
+      ]
+    },
+    {
+      "titulo": "Generación de códigos de seguimiento únicos",
+      "tipo": "exito",
+      "dado": [
+        "Que existen reportes sísmicos registrados anteriormente",
+        "Que un ciudadano envía un nuevo reporte válido"
+      ],
+      "cuando": "Cuando el sistema genera el código de seguimiento del nuevo reporte",
+      "entonces": [
+        "El sistema asigna un código único al nuevo reporte",
+        "El código generado es diferente de los códigos de otros reportes registrados",
+        "El código queda asociado permanentemente al reporte correspondiente"
+      ]
+    },
+    {
+      "titulo": "Confirmación de reporte enviado mediante web",
+      "tipo": "exito",
+      "dado": [
+        "Que el ciudadano utiliza la plataforma web",
+        "Que ha completado correctamente el formulario de reporte"
+      ],
+      "cuando": "Cuando confirma el envío del reporte",
+      "entonces": [
+        "El sistema registra el reporte",
+        "El sistema genera un código de seguimiento",
+        "El sistema muestra el código en pantalla",
+        "El ciudadano puede visualizar y copiar el código generado"
+      ]
+    },
+    {
+      "titulo": "Confirmación de reporte enviado mediante SMS",
+      "tipo": "exito",
+      "dado": [
+        "Que el ciudadano envía un reporte válido mediante SMS",
+        "Que el sistema recibe y registra correctamente el mensaje"
+      ],
+      "cuando": "Cuando finaliza el registro del reporte",
+      "entonces": [
+        "El sistema genera un código de seguimiento único",
+        "El sistema envía un SMS de confirmación al número remitente",
+        "El mensaje contiene el código de seguimiento",
+        "El mensaje informa que el reporte fue registrado correctamente"
+      ]
+    },
+    {
+      "titulo": "Envío de reporte con datos incompletos",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano intenta registrar un reporte",
+        "Que falta información obligatoria para completar el registro"
+      ],
+      "cuando": "Cuando envía el formulario",
+      "entonces": [
+        "El sistema rechaza el registro del reporte",
+        "El sistema muestra los campos que deben completarse",
+        "El sistema no genera un código de seguimiento",
+        "El sistema no muestra una confirmación de registro exitoso"
+      ]
+    },
+    {
+      "titulo": "Error durante la generación del código de seguimiento",
+      "tipo": "error",
+      "dado": [
+        "Que el ciudadano ha enviado correctamente los datos del reporte",
+        "Que ocurre un error interno al generar el código de seguimiento"
+      ],
+      "cuando": "Cuando el sistema intenta completar el registro",
+      "entonces": [
+        "El sistema informa que no pudo completar la operación",
+        "El sistema evita mostrar un código de seguimiento inválido",
+        "El sistema garantiza que el reporte no quede registrado sin un código asociado",
+        "El sistema permite reintentar la operación sin generar registros duplicados"
+      ]
+    },
+    {
+      "titulo": "Falla en el envío de la confirmación",
+      "tipo": "error",
+      "dado": [
+        "Que el reporte ha sido registrado correctamente",
+        "Que ocurre un problema en el servicio de envío de SMS o notificaciones"
+      ],
+      "cuando": "Cuando el sistema intenta enviar la confirmación",
+      "entonces": [
+        "El sistema conserva el reporte registrado",
+        "El código de seguimiento permanece asociado al reporte",
+        "El sistema informa que no fue posible entregar la confirmación",
+        "El sistema no registra nuevamente el reporte por el fallo de notificación"
+      ]
+    },
+    {
+      "titulo": "Registro de reportes simultáneos",
+      "tipo": "borde",
+      "dado": [
+        "Que varios ciudadanos envían reportes sísmicos simultáneamente",
+        "Que el sistema se encuentra operativo"
+      ],
+      "cuando": "Cuando el sistema procesa los registros al mismo tiempo",
+      "entonces": [
+        "El sistema genera un código único para cada reporte",
+        "Cada código queda asociado al ciudadano y reporte correspondiente",
+        "El sistema entrega la confirmación correspondiente a cada ciudadano",
+        "No se producen códigos duplicados ni asociaciones incorrectas"
+      ]
+    },
+    {
+      "titulo": "Evitar códigos duplicados al reenviar un reporte",
+      "tipo": "borde",
+      "dado": [
+        "Que el ciudadano ya ha registrado un reporte correctamente",
+        "Que el ciudadano intenta reenviar la solicitud debido a una demora en la confirmación"
+      ],
+      "cuando": "Cuando el sistema recibe nuevamente la misma solicitud",
+      "entonces": [
+        "El sistema verifica si la solicitud ya fue procesada",
+        "El sistema evita registrar duplicadamente la misma operación",
+        "El sistema conserva el código de seguimiento del reporte original cuando se identifica como una solicitud repetida"
+      ]
+    },
+    {
+      "titulo": "Confirmación después de recuperar la conexión",
+      "tipo": "borde",
+      "dado": [
+        "Que el ciudadano ha enviado un reporte mediante la plataforma web",
+        "Que la conexión se interrumpe después de enviar la solicitud"
+      ],
+      "cuando": "Cuando se restablece la conexión y el ciudadano consulta el resultado del envío",
+      "entonces": [
+        "El sistema permite verificar si el reporte fue registrado",
+        "Si el registro fue exitoso, muestra el código de seguimiento correspondiente",
+        "El sistema evita generar un segundo registro del mismo reporte"
+      ]
+    },
+    {
+      "titulo": "Conservación del código de seguimiento",
+      "tipo": "exito",
+      "dado": [
+        "Que el ciudadano ha recibido un código de seguimiento válido",
+        "Que el reporte se encuentra almacenado en el sistema"
+      ],
+      "cuando": "Cuando el ciudadano vuelve a consultar la información del reporte",
+      "entonces": [
+        "El sistema conserva el código originalmente generado",
+        "El código permite identificar el reporte correspondiente",
+        "El sistema no modifica el código durante las consultas posteriores"
+      ]
+    }
+  ]
+}
