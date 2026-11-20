@@ -1,0 +1,23 @@
+### **Criterios de aceptación – Historia de usuario: Implementación de tabla de reportes sísmicos e infraestructura de almacenamiento**
+
+**HU:** Como desarrollador del sistema SismoReporta AQP, quiero crear la tabla `reportes_sismicos` con un índice espacial GiST en PostGIS y una cola Redis para almacenar y procesar eficientemente los reportes sísmicos.
+
+1\. **Creación de tabla:** El sistema debe contar con una tabla llamada `reportes_sismicos` en la base de datos PostgreSQL.
+
+2\. **Estructura de la tabla:** La tabla debe incluir los campos necesarios para almacenar el identificador del reporte, distrito, intensidad percibida, ubicación geográfica, fecha y hora de registro y estado del reporte.
+
+3\. **Extensión PostGIS:** La base de datos debe tener habilitada la extensión PostGIS para gestionar información geográfica.
+
+4\. **Índice espacial GiST:** El sistema debe crear un índice espacial GiST sobre el campo de ubicación geográfica para optimizar las consultas espaciales.
+
+5\. **Almacenamiento de coordenadas:** El sistema debe permitir registrar las coordenadas geográficas de cada reporte mediante un campo de tipo `GEOMETRY` o `GEOGRAPHY`.
+
+6\. **Implementación de Redis:** El sistema debe contar con una cola Redis para recibir temporalmente los reportes pendientes de procesamiento.
+
+7\. **Procesamiento de la cola:** El sistema debe procesar los reportes almacenados en Redis y registrarlos correctamente en PostgreSQL.
+
+8\. **Integridad de datos:** El sistema debe evitar la pérdida y duplicación de reportes durante el procesamiento de la cola.
+
+9\. **Validación de funcionamiento:** Se debe comprobar que el índice GiST optimice las consultas espaciales y que Redis permita gestionar correctamente los reportes pendientes.
+
+10\. **Persistencia:** Los reportes procesados deben permanecer almacenados en PostgreSQL aunque se reinicie el servicio Redis.
