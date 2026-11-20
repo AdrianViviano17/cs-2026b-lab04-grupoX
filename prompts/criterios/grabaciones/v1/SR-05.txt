@@ -1,0 +1,19 @@
+### **Criterios de aceptación – Historia de usuario: Visualizar conteo de reportes verificados**
+
+**HU:** Como operador de emergencias, quiero visualizar en el tablero público el conteo actualizado de reportes verificados en los últimos 30 minutos.
+
+1\. **Visualización del conteo:** El sistema debe mostrar la cantidad total de reportes sísmicos verificados durante los últimos 30 minutos.
+
+2\. **Actualización automática:** El tablero debe actualizar el conteo automáticamente cada cierto intervalo de tiempo, sin necesidad de recargar la página.
+
+3\. **Filtro temporal:** El sistema debe considerar únicamente los reportes verificados cuya fecha y hora de registro estén dentro de los últimos 30 minutos.
+
+4\. **Exclusión de reportes:** El sistema no debe incluir reportes pendientes, rechazados o duplicados en el conteo.
+
+5\. **Actualización del periodo:** El sistema debe excluir automáticamente los reportes que superen los 30 minutos desde su registro.
+
+6\. **Sin reportes:** Si no existen reportes verificados en ese periodo, el sistema debe mostrar el valor cero (0).
+
+7\. **Fecha y hora de actualización:** El tablero debe mostrar la fecha y hora de la última actualización del conteo.
+
+8\. **Disponibilidad pública:** El conteo debe estar disponible para cualquier ciudadano que ingrese al tablero público, sin necesidad de iniciar sesión.
