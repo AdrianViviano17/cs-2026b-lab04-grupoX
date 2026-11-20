@@ -1,0 +1,11 @@
+NO CLASIFICABLE – REPORTE INVÁLIDO
+Justificación: El contenido es un mensaje de prueba ("jajaja hola probando la app 12345") y no describe ningún evento sísmico, daño material ni situación de emergencia.
+
+Clasificación del reporte:
+- Distrito: Paucarpata, Arequipa.
+- Incidente: Ninguno identificado.
+- Personas afectadas: No aplica.
+- Nivel de riesgo: No determinado.
+- Prioridad de atención: No aplica.
+- Acción requerida: Identificarlo como reporte de prueba o contenido no válido y excluirlo de las alertas de emergencia.
+Criterio de clasificación: No se asigna P1, P2 ni P3 porque el reporte no contiene información relevante sobre un incidente sísmico.
