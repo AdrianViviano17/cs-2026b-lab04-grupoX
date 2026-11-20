@@ -1,0 +1,61 @@
+{
+  "historia_id": "SR-02",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Envío exitoso del reporte por SMS",
+      "tipo": "exito",
+      "dado": [
+        "El ciudadano se encuentra en Arequipa",
+        "El ciudadano no tiene acceso a internet móvil",
+        "El ciudadano cuenta con señal de telefonía móvil y saldo o disponibilidad para enviar SMS"
+      ],
+      "cuando": "Envía un SMS con su reporte de sismo",
+      "entonces": [
+        "El sistema recibe el mensaje de texto",
+        "El sistema confirma la recepción del reporte",
+        "La alerta queda disponible para las brigadas locales"
+      ]
+    },
+    {
+      "titulo": "Envío de SMS durante una caída de datos móviles",
+      "tipo": "exito",
+      "dado": [
+        "Los datos móviles no están disponibles en el distrito de Cayma",
+        "El servicio de SMS está disponible",
+        "El ciudadano envía su reporte mediante mensaje de texto"
+      ],
+      "cuando": "El mensaje llega al sistema",
+      "entonces": [
+        "El reporte es recibido sin necesidad de conexión a internet",
+        "El ciudadano recibe una confirmación de recepción"
+      ]
+    },
+    {
+      "titulo": "Mensaje SMS sin información suficiente",
+      "tipo": "error",
+      "dado": [
+        "El ciudadano envía un SMS sin indicar la información necesaria para identificar su reporte"
+      ],
+      "cuando": "El sistema recibe el mensaje",
+      "entonces": [
+        "El sistema informa que el reporte no pudo ser procesado",
+        "El ciudadano recibe una indicación para completar la información faltante"
+      ]
+    },
+    {
+      "titulo": "Envío sin señal de telefonía móvil",
+      "tipo": "borde",
+      "dado": [
+        "El ciudadano se encuentra en el distrito de Mariano Melgar",
+        "No hay señal de telefonía móvil disponible"
+      ],
+      "cuando": "Intenta enviar su reporte mediante SMS",
+      "entonces": [
+        "El mensaje no puede ser transmitido mientras no exista señal",
+        "El sistema no confirma la recepción del reporte"
+      ]
+    }
+  ]
+}
