@@ -1,0 +1,18 @@
+Criterios de aceptación – Historia de usuario: Confirmación y código de seguimiento
+HU: Como ciudadano, quiero recibir una confirmación inmediata con un código de seguimiento después de registrar mi reporte sísmico.
+
+1. Confirmación de registro: El sistema debe mostrar un mensaje confirmando que el reporte sísmico fue registrado exitosamente.
+
+2. Generación de código: El sistema debe generar automáticamente un código único de seguimiento para cada reporte registrado.
+
+3. Visualización del código: El sistema debe mostrar el código de seguimiento al ciudadano después de enviar su reporte.
+
+4. Envío de confirmación: El sistema debe enviar la confirmación y el código de seguimiento mediante el mismo canal utilizado para registrar el reporte (web o SMS).
+
+5. Consulta del reporte: El sistema debe permitir al ciudadano consultar el estado de su reporte utilizando el código de seguimiento.
+
+6. Validación del código: El sistema debe verificar que el código ingresado exista y corresponda a un reporte registrado.
+
+7. Control de errores: Si ocurre un problema durante el registro, el sistema debe informar al ciudadano que el reporte no pudo ser registrado y no debe generar un código de seguimiento válido.
+
+8. Unicidad del código: El sistema debe garantizar que cada código de seguimiento pertenezca a un solo reporte.
