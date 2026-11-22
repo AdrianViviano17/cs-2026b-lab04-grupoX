@@ -1,0 +1,11 @@
+# Lienzo de Diseño del Sistema Agéntico - SismoReporta AQP (Caso 8)
+
+| Decisión de diseño | Elección para SismoReporta AQP | Justificación |
+| :--- | :--- | :--- |
+| **1. ¿Agente o flujo de trabajo?** | **Agente** (para resolución de issues en código) | Los pasos para localizar y corregir bugs en el repositorio no son fijos de antemano; el agente debe explorar archivos, ejecutar `pytest` y validar el diff. *(Nota: en producción, la clasificación de reportes del Lab 09 sigue siendo un flujo de trabajo fijo)*. |
+| **2. Arquetipo** | **Planificador-ejecutor + ReAct** | Combina un plan inicial corto y legible con un bucle ReAct (`pensamiento -> acción -> observación`) para inspeccionar el código, editarlo y correr pruebas. |
+| **3. Herramientas** | `listar_archivos`, `leer_archivo`, `buscar`, `editar_archivo`, `ejecutar_pruebas`, `ver_cambios`, `ejecutar_comando` + nuevas `mapa_repo` y `anotar`/`leer_notas` | Conjunto mínimo y acotado (principio de mínimo privilegio) para explorar el repositorio, aplicar parches quirúrgicos y verificar con `pytest` y `radon` sin acceso a red ni comandos destructivos. |
+| **4. Memoria** | **Corto plazo** (historial de sesión) + **Memoria de notas/pizarra** (`notas.md`) | El historial conserva las observaciones de la sesión actual y `notas.md` permite registrar hipótesis y archivos ya revisados para reducir pasos y consumo de tokens. |
+| **5. Coordinación** | **Agente único** (Issue 1 y 3) y **Por gestor + Actor-crítico** (`planificador`, `ejecutor` y `revisor` de solo lectura, máx. 2 rondas) en Issue 2 | Separar quién modifica el código (`ejecutor`) de quién lo audita (`revisor` sin permiso de escritura) detecta errores sutiles o inyecciones indirectas antes de llegar al humano. |
+| **6. Rol humano** | **Revisor (Human-in-the-loop)** con aprobación explícita de ediciones (`aprobar_edicion`) y del Pull Request | Nivel inicial de confianza: el humano inspecciona cada propuesta de modificación (`s`/`n`) y conserva la decisión final de fusión. |
+| **7. Control y guardrails** | Contrato JSON estricto, `Politica` por rol (sandbox, lista blanca de comandos, `tests/` protegida), límite de 12 pasos y máx. 2 rondas | Evita bucles infinitos, ejecución de comandos arbitrarios (OWASP LLM06) y que el agente altere los tests para "hacerlos pasar". |
