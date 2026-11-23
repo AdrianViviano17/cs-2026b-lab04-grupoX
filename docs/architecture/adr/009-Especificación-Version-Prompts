@@ -1,0 +1,32 @@
+# ADR-009: Especificación Versionada de Prompts, Contratos JSON y Defensa OWASP LLM01
+
+* **Estado:** Aceptado  
+* **Fecha:** 2026-11-14  
+* **Contexto:** Laboratorio 09 – Construcción de Software (Caso 8: SismoReporta AQP)  
+
+## 1. Contexto y Problema
+La plataforma ciudadana **SismoReporta AQP** requiere integrar Modelos de Lenguaje Grande (LLMs) en dos flujos críticos:
+1. **Generación de criterios de aceptación (QA):** Transformar historias de usuario en escenarios Gherkin verificables previa validación INVEST.
+2. **Clasificación de prioridad de reportes sísmicos (COER Arequipa):** Categorizar la urgencia (`CRITICA`, `ALTA`, `MEDIA`, `BAJA`, `DESCARTADO`) y detectar necesidad de rescate a partir de reportes ciudadanos en texto libre.
+
+El uso de *prompts* informales sin estructura genera salidas en texto libre impredecibles, alucinaciones de requisitos no solicitados y exposición directa a ataques de inyección de prompts (OWASP Top 10 for LLM 2025 - LLM01) procedentes de entradas ciudadanas no confiables.
+
+## 2. Decisión Arquitectónica
+Se establece que los *prompts* deben tratarse como **especificaciones ejecutables, versionadas y verificables** mediante los siguientes mecanismos:
+1. **Versionado explícito de plantillas (`v1.txt` $\rightarrow$ `v3.txt`):** Separación de los prompts en `prompts/criterios/` y `prompts/prioridad/` incorporando rol, contexto del dominio, evaluación previa *Cognitive Verifier* (INVEST), restricciones negativas y ejemplos *few-shot*.
+2. **Contratos estructurados con JSON Schema (`esquema.json`):** Toda respuesta del modelo debe ajustarse estrictamente a un esquema JSON con `"additionalProperties": false`, validado en tiempo de ejecución por los adaptadores `GeneradorCriterios` y `ClasificadorPrioridadLLM` (`src/reportes/generador_criterios.py`) mediante `jsonschema`.
+3. **Arquitectura de defensa en 4 capas frente a OWASP LLM01:**
+   * *Capa 1:* Encapsulamiento de entradas externas con delimitadores XML (`<historia>` y `<reporte>`).
+   * *Capa 2:* Reglas explícitas de aislamiento que ordenan tratar el bloque delimitado únicamente como dato.
+   * *Capa 3:* Validación determinista en Python que lanza `SalidaInvalidaLLM` ante cualquier ruptura de contrato.
+   * *Capa 4:* Principio de mínimo privilegio y supervisión humana del operador COER antes de despachar brigadas.
+4. **Evaluación automatizada y reproducibilidad en CI/CD:** Suite de *evals* con `promptfoo` (`promptfooconfig.yaml`) y pruebas de integración en `pytest` respaldadas por respuestas grabadas (*fixtures*) en GitHub Actions.
+
+## 3. Alternativas Descartadas
+* **Consumo de texto libre / Markdown con expresiones regulares:** Descartado por alta fragilidad ante variaciones léxicas del modelo y dificultad para validar tipos de datos de forma determinista.
+* **Solicitar razonamiento explícito (*Chain-of-Thought* visible) en la salida:** Descartado tras comprobar empíricamente que añadir prosa explicativa rompía el parseo estricto de `json.loads()` y violaba el contrato `esquema.json`.
+* **Llamadas en vivo a APIs de LLM durante la ejecución de CI/CD:** Descartado por introducir no-determinismo en las aserciones textuales, latencia y dependencia de credenciales externas en el pipeline.
+
+## 4. Consecuencias
+* **Positivas:** Incremento de la tasa de aprobación automatizada del `0.0%` (`v1`) al `100.0%` (`v3`) en ambas tareas, bloqueo efectivo de ataques de inyección directa e indirecta (`SR-08`, `REP-07`, `REP-08`) y ejecución reproducible en integración continua.
+* **Negativas / Compromisos:** Requiere actualizar los *fixtures* grabados cada vez que evoluciona el contrato `esquema.json` o la plantilla `v3.txt`, y rechaza respuestas válidas semánticamente si el modelo incluye texto fuera del objeto JSON.
