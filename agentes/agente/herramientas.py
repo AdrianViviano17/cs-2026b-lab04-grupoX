@@ -65,6 +65,7 @@ class Herramientas:
             cwd=self.raiz,
             capture_output=True,
             text=True,
+            timeout=15,
         )
         salida = (res.stdout + "\n" + res.stderr).strip()
         return salida or f"exit={res.returncode}"
