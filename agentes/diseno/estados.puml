@@ -1,0 +1,20 @@
+@startuml
+title Máquina de Estados del Agente ReAct - SismoReporta AQP (Lab 10)
+
+[*] --> Decidiendo : objetivo recibido
+
+Decidiendo --> ValidandoContrato : decisión JSON emitida
+ValidandoContrato --> Observando : [inválida] / ERROR DE CONTRATO
+ValidandoContrato --> Finalizado : [válida y es "final"]
+ValidandoContrato --> EvaluandoPolitica : [válida y es "accion"]
+
+EvaluandoPolitica --> LimiteAlcanzado : [paso > max_pasos]
+EvaluandoPolitica --> Observando : [denegada por política o humano] / BLOQUEADO
+EvaluandoPolitica --> Ejecutando : [permitida]
+
+Ejecutando --> Observando : resultado o error capturado
+Observando --> Decidiendo : observación agregada al historial
+
+Finalizado --> [*]
+LimiteAlcanzado --> [*]
+@enduml
