@@ -1,0 +1,36 @@
+name: Validación Sistema Agéntico (Lab 10)
+
+on:
+  push:
+    branches: [ "feat/lab10-agentes", "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  verificar-agentes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest radon
+
+      - name: 1. Ejecutar pruebas deterministas del agente (Contrato, Política, Herramientas)
+        run: PYTHONPATH=. pytest -v agentes/pruebas_agente
+
+      - name: 2. Ejecutar Orquestador Multiagente (Issues #01, #02 y #03)
+        run: PYTHONPATH=. python agentes/orquestador.py --auto
+
+      - name: 3. Verificar que los 3 issues quedaron resueltos en verde
+        run: PYTHONPATH=. pytest -v tests/test_issue_01.py tests/test_issue_02.py tests/test_issue_03.py
+
+      - name: 4. Verificar complejidad ciclomática con radon
+        run: radon cc -s src/reportes/servicio_sismos.py
