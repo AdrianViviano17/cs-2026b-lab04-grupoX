@@ -1,0 +1,5 @@
+[
+  {"pensamiento": "Atiendo la observación del revisor agregando el docstring en calcular_prioridad_reporte.", "accion": "editar_archivo", "args": {"ruta": "src/reportes/servicio_sismos.py", "antes": "def calcular_prioridad_reporte(intensidad: int, heridos: int, tiene_foto: bool) -> str:", "despues": "def calcular_prioridad_reporte(intensidad: int, heridos: int, tiene_foto: bool) -> str:\n    \"\"\"Calcula prioridad sísmica: riesgo vital (heridos > 0 o intensidad >= 7) prevalece sobre tiene_foto (Issue #02).\"\"\""}},
+  {"pensamiento": "Verifico nuevamente pytest.", "accion": "ejecutar_pruebas", "args": {"objetivo": "tests/test_issue_02.py"}},
+  {"pensamiento": "Listo para revisión final.", "final": "Ronda 2 completada: docstring documentado y pruebas en verde."}
+]
