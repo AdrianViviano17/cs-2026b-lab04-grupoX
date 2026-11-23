@@ -153,5 +153,62 @@ Plataforma ciudadana para el reporte y triage de emergencias sísmicas en Arequi
 * `prompts/prioridad/`: Plantillas `v1.txt`–`v3.txt`, `esquema.json`, casos `reportes.yaml`, grabaciones y `promptfooconfig.yaml`.
 * `src/reportes/generador_criterios.py`: Adaptadores `GeneradorCriterios` y `ClasificadorPrioridadLLM` con validación `jsonschema`.
 * `tests/test_prompts_integracion.py`: Pruebas automatizadas con fixtures grabados.
+
+---
+
+## Sistemas agénticos (Lab 10)
+
+Módulo de ingeniería de software agéntica (`agentes/`) aplicado a la resolución autónoma y auditada de issues en **SismoReporta AQP** (`ISSUE-01`, `ISSUE-02`, `ISSUE-03`)[cite: 17, 18].
+
+### 1. Máquina de Estados del Agente (`agentes/diseno/estados.puml`)
+
+```mermaid
+stateDiagram-v2
+    [*] --> Decidiendo : objetivo recibido
+    Decidiendo --> ValidandoContrato : decisión JSON emitida
+    ValidandoContrato --> Observando : [inválida] / ERROR DE CONTRATO
+    ValidandoContrato --> Finalizado : [válida y es "final"]
+    ValidandoContrato --> EvaluandoPolitica : [válida y es "accion"]
+    EvaluandoPolitica --> LimiteAlcanzado : [paso > max_pasos]
+    EvaluandoPolitica --> Observando : [denegada] / BLOQUEADO
+    EvaluandoPolitica --> Ejecutando : [permitida]
+    Ejecutando --> Observando : resultado o error
+    Observando --> Decidiendo : observación agregada
+    Finalizado --> [*]
+    LimiteAlcanzado --> [*]
+```
+
+### 2. Trayectoria Multiagente Actor-Crítico (Issue #02 - Ronda 1)
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario/Orquestador
+    participant A as Agente Ejecutor
+    participant P as Politica/Herramientas
+    U->>A: Objetivo asignado (ISSUE-02)
+    A->>P: leer_archivo
+    P-->>A: Observacion OK
+    A->>P: ejecutar_pruebas
+    P-->>A: Observacion OK
+    A->>P: leer_archivo
+    P-->>A: Observacion OK
+    A-xP: ejecutar_comando (BLOQUEADO por política)
+    A->>P: editar_archivo
+    P-->>A: Observacion OK
+    A->>P: ejecutar_pruebas
+    P-->>A: Observacion OK
+    A-->>U: Respuesta final
+```
+
+### 3. Resumen de Métricas de Ejecución (E7)
+
+| Issue / Configuración | Coordinación | Rondas | Pasos | Inválidas | Bloqueadas | Contexto Final | Resultado |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Issue #01** (Duplicados) | Agente único | 1 | 7 | 1 | 0 | ~5,400 chars | `1 passed` |
+| **Issue #02** (Sin foto - A) | Agente único | 1 | 6 | 0 | 0 | ~4,900 chars | `1 passed` |
+| **Issue #02** (Sin foto - B) | Actor-Crítico | 2 | 12 | 0 | 1 | ~7,800 chars | `1 passed` |
+| **Issue #03** (Coordenadas) | Agente + `mapa_repo` + `notas.md` | 1 | 5 | 0 | 0 | ~3,600 chars | `1 passed` |
+
+* **Documentación detallada:** Ver `agentes/diseno/lienzo.md`, `agentes/delegacion.md`, `agentes/observacion.md`, `agentes/bitacora-ia.md` y `docs/architecture/adr/010-sistema-agentico.md`.
 * `seguridad/red-team.md`: Matriz de ataques OWASP LLM01 y defensa en 4 capas.
 * `bitacora-ia.md`: Registro de iteraciones y experimento de no-determinismo.
