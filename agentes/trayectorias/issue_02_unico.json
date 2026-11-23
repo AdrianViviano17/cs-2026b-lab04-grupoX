@@ -1,0 +1,8 @@
+[
+  {"pensamiento": "Leo el Issue #02 sobre prioridad errónea sin foto.", "accion": "leer_archivo", "args": {"ruta": "issues/ISSUE-02.md"}},
+  {"pensamiento": "Ejecuto la prueba del issue 02 para reproducir el fallo.", "accion": "ejecutar_pruebas", "args": {"objetivo": "tests/test_issue_02.py"}},
+  {"pensamiento": "Leo servicio_sismos.py para revisar calcular_prioridad_reporte.", "accion": "leer_archivo", "args": {"ruta": "src/reportes/servicio_sismos.py"}},
+  {"pensamiento": "Corrijo el orden de evaluación para priorizar heridos e intensidad alta sobre tiene_foto.", "accion": "editar_archivo", "args": {"ruta": "src/reportes/servicio_sismos.py", "antes": "    # BUG ISSUE-02: Si no tiene foto, degrada erróneamente a MEDIA incluso con heridos o intensidad alta\n    if not tiene_foto:\n        return \"MEDIA\"\n    if heridos > 0 or intensidad >= 7:\n        return \"CRITICA\"", "despues": "    if heridos > 0 or intensidad >= 7:\n        return \"CRITICA\"\n    if not tiene_foto:\n        return \"MEDIA\""}},
+  {"pensamiento": "Ejecuto pytest para verificar que test_issue_02 pasa.", "accion": "ejecutar_pruebas", "args": {"objetivo": "tests/test_issue_02.py"}},
+  {"pensamiento": "Pruebas en verde.", "final": "Issue #02 resuelto por agente único."}
+]
