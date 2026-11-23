@@ -1,0 +1,8 @@
+[
+  {"pensamiento": "Uso mapa_repo para localizar la función de coordenadas sin leer todo el proyecto.", "accion": "mapa_repo", "args": {"subruta": "src"}},
+  {"pensamiento": "Anoto la ubicación exacta en mi memoria de trabajo notas.md.", "accion": "anotar", "args": {"texto": "ISSUE-03: validar_coordenadas_arequipa ubicada en src/reportes/servicio_sismos.py"}},
+  {"pensamiento": "Leo servicio_sismos.py para ver la implementación actual.", "accion": "leer_archivo", "args": {"ruta": "src/reportes/servicio_sismos.py"}},
+  {"pensamiento": "Edito validar_coordenadas_arequipa para exigir el bounding box de Arequipa.", "accion": "editar_archivo", "args": {"ruta": "src/reportes/servicio_sismos.py", "antes": "    # BUG ISSUE-03: No valida el rango geográfico de Arequipa (-17.5 a -14.5 lat, -75.2 a -70.8 lon)\n    if latitud is None or longitud is None:\n        raise ValueError(\"Coordenadas requeridas\")\n    return True", "despues": "    if latitud is None or longitud is None:\n        raise ValueError(\"Coordenadas requeridas\")\n    if not (-17.5 <= latitud <= -14.5 and -75.2 <= longitud <= -70.8):\n        raise ValueError(f\"Coordenadas fuera de Arequipa: ({latitud}, {longitud})\")\n    return True"}},
+  {"pensamiento": "Ejecuto las pruebas del issue 03 para confirmar que ahora pasa.", "accion": "ejecutar_pruebas", "args": {"objetivo": "tests/test_issue_03.py"}},
+  {"pensamiento": "Todas las pruebas en verde.", "final": "Issue #03 resuelto usando mapa_repo y notas.md en 5 pasos."}
+]
